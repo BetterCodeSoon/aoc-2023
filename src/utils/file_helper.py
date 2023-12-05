@@ -1,7 +1,7 @@
 from pathlib import Path
 
 CURRENT_FILE = Path(__file__)
-PROJECT_ROOT = CURRENT_FILE.parent.parent
+PROJECT_ROOT = CURRENT_FILE.parent.parent.parent
 
 
 def get_puzzle_filename(day, puzzle_nr):
