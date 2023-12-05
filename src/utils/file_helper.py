@@ -23,3 +23,7 @@ def get_puzzle_input_path(day, puzzle_nr):
 def read_file_lines(filepath):
     with open(filepath, "r") as file:
         return file.readlines()
+
+
+def read_expected_values(filepath, delimiter):
+    return {line.split(delimiter)[0]: line.split(delimiter)[1] for line in read_file_lines(filepath)}
