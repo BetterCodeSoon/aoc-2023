@@ -3,5 +3,5 @@ import src.utils.file_helper as file_helper
 
 
 @pytest.fixture
-def testfile_path(project_root_path):
+def testfile_path():
     return file_helper.PROJECT_ROOT / "resources" / "tests" / "testfile1.txt"
