@@ -50,7 +50,6 @@ def replace_written_digits(input_string):
     return replaced_digits_str
 
 
-
 def find_calibration_value(input_string):
     """
     Finds the first and last digit in an input string.
