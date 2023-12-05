@@ -2,6 +2,11 @@ import re
 import src.utils.file_helper as file_helper
 
 
+def replace_written_digits(input_string):
+    replaced_digits_str = "placeholder until function is written"
+    return replaced_digits_str
+
+
 def find_calibration_value(input_string):
     """
     Finds the first and last digit in an input string.
