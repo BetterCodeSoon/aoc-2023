@@ -1,18 +1,12 @@
 import pytest
 
 import src.utils.file_helper as file_helper
-from tests.conftest import testfile_content
-from tests.conftest import testfile_path
+from tests.conftest import testfile1_path
+from tests.conftest import testfile1_content_lines
+from tests.conftest import testfile1_dict
+from tests.conftest import testfile1_delimiter
 
 
-# @pytest.mark.parametrize(
-#     ("expected_key", "expected_val"),
-#     [
-#         ("1abc2", "12"),
-#         ("pqr3stu8vwx", "38"),
-#         ("a1b2c3d4e5f", "15"),
-#         ("treb7uchet", "77")
-#     ])
 class TestFileHelper:
     def test_get_puzzle_filename(self):
         n = 1
@@ -26,10 +20,10 @@ class TestFileHelper:
         expected_path = file_helper.PROJECT_ROOT / "resources" / f"day{day}" / filename
         assert expected_path == file_helper.get_puzzle_input_path(day, puzzle_nr)
 
-    def test_read_file_lines(self, testfile_path, testfile_content):
-        file_content = file_helper.read_file_lines(testfile_path)
-        assert file_content == testfile_content
+    def test_read_file_lines(self, testfile1_path, testfile1_content_lines):
+        file_content = file_helper.read_file_lines(testfile1_path)
+        assert file_content == testfile1_content_lines
 
-    @pytest.mark.skip("yet to be implemented")
-    def test_read_expected_values(self, testfile_path):
-        pass
+    def test_read_expected_values(self, testfile1_path, testfile1_delimiter, testfile1_dict):
+        result_dict = file_helper.read_expected_values(testfile1_path, testfile1_delimiter)
+        assert result_dict == testfile1_dict
