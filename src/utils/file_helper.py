@@ -45,7 +45,7 @@ def read_file_lines(filepath):
         return file.readlines()
 
 
-def read_expected_values(filepath, delimiter):
+def read_expected_values(filepath, delimiter) -> {str: str}:
     return {line.split(delimiter)[0]: line.split(delimiter)[1].strip() for line in read_file_lines(filepath)}
 
 
