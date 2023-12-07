@@ -1,11 +1,7 @@
 import pytest
 
 import src.utils.file_helper as file_helper
-from tests.conftest import testfile1_path
-from tests.conftest import testfile1_content_lines
-from tests.conftest import testfile1_dict
-from tests.conftest import testfile1_delimiter
-from tests.conftest import testfile1_tuple_list
+import conftest  # this works despite pycharm marking the statement as unused
 
 
 class TestFileHelper:
