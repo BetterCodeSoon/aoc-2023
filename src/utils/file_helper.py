@@ -27,3 +27,8 @@ def read_file_lines(filepath):
 
 def read_expected_values(filepath, delimiter):
     return {line.split(delimiter)[0]: line.split(delimiter)[1].strip() for line in read_file_lines(filepath)}
+
+
+def read_test_values_tuple_list(filepath, delimiter) -> [(str, str)]:
+    file_lines = read_file_lines(filepath)
+    return [(line.split(delimiter)[0], line.split(delimiter)[1].strip()) for line in file_lines]

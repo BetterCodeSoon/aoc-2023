@@ -20,3 +20,8 @@ def testfile1_delimiter():
 @pytest.fixture
 def testfile1_dict():
     return {"1abc2": "12", "pqr3stu8vwx": "38", "a1b2c3d4e5f": "15", "treb7uchet": "77"}
+
+
+@pytest.fixture
+def testfile1_tuple_list():
+    return [("1abc2", "12"), ("pqr3stu8vwx", "38"), ("a1b2c3d4e5f", "15"), ("treb7uchet", "77")]
