@@ -8,10 +8,6 @@ from tests.conftest import testfile1_delimiter
 from tests.conftest import testfile1_tuple_list
 
 
-@pytest.fixture()
-def puzzle1_tuplelist:
-    file_helper.read_test_values_tuple_list()
-
 class TestFileHelper:
 
     def test_puzzle_testcases_filename(self):
