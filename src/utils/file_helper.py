@@ -4,11 +4,15 @@ CURRENT_FILE = Path(__file__)
 PROJECT_ROOT = CURRENT_FILE.parent.parent.parent
 
 
-def get_puzzle_filename(day, puzzle_nr):
+def path_for_day(day):
+    return PROJECT_ROOT / "resources" / f"day{day}"
+
+
+def puzzle_filename(day, puzzle_nr):
     return f"day{day}_puzzle{puzzle_nr}_input.txt"
 
 
-def get_puzzle_input_path(day, puzzle_nr):
+def puzzle_input_path(day, puzzle_nr):
     """
     Naming convention for the files containing the puzzle inputs: \n
         resources \n
@@ -17,7 +21,23 @@ def get_puzzle_input_path(day, puzzle_nr):
 
     example: day1_puzzle1_input.txt
     """
-    return PROJECT_ROOT / "resources" / f"day{day}" / get_puzzle_filename(day, puzzle_nr)
+    return path_for_day(day) / puzzle_filename(day, puzzle_nr)
+
+
+def puzzle_testcases_filename(day):
+    return f"day{day}_testcases.txt"
+
+
+def puzzle_testcases_path(day):
+    """
+    Naming convention for the files containing the puzzle inputs: \n
+        resources \n
+        ├── day{day} \n
+        │   ├─ day{day}_testcases.txt \n
+
+    example: day1_testcases.txt
+    """
+    return path_for_day(day) / puzzle_testcases_filename(day)
 
 
 def read_file_lines(filepath):
