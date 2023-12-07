@@ -24,20 +24,20 @@ def puzzle_input_path(day, puzzle_nr):
     return path_for_day(day) / puzzle_filename(day, puzzle_nr)
 
 
-def puzzle_testcases_filename(day):
-    return f"day{day}_testcases.txt"
+def puzzle_testcases_filename(day, testcase):
+    return f"day{day}_testcases{testcase}.txt"
 
 
-def puzzle_testcases_path(day):
+def puzzle_testcases_path(day, testcase):
     """
     Naming convention for the files containing the puzzle inputs: \n
         resources \n
         ├── day{day} \n
         │   ├─ day{day}_testcases.txt \n
 
-    example: day1_testcases.txt
+    example: day1_testcases1.txt
     """
-    return path_for_day(day) / puzzle_testcases_filename(day)
+    return path_for_day(day) / puzzle_testcases_filename(day, testcase)
 
 
 def read_file_lines(filepath):

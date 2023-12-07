@@ -7,15 +7,15 @@ import conftest  # this works despite pycharm marking the statement as unused
 class TestFileHelper:
 
     def test_puzzle_testcases_filename(self):
-        day = 1
-        expected = f"day{day}_testcases.txt"
-        assert expected == file_helper.puzzle_testcases_filename(day)
+        n = 1
+        expected = f"day{n}_testcases{n}.txt"
+        assert expected == file_helper.puzzle_testcases_filename(n, n)
 
     def test_puzzle_testcase_path(self):
-        day = 1
-        filename = file_helper.puzzle_testcases_filename(day)
-        expected = file_helper.PROJECT_ROOT / "resources" / f"day{day}" / filename
-        result = file_helper.puzzle_testcases_path(day)
+        n = 1
+        filename = file_helper.puzzle_testcases_filename(n, n)
+        expected = file_helper.PROJECT_ROOT / "resources" / f"day{n}" / filename
+        result = file_helper.puzzle_testcases_path(n, n)
         assert result == expected
 
     def test_puzzle_filename(self):
