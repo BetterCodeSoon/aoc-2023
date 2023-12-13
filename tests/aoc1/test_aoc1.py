@@ -10,31 +10,18 @@ def puzzle1_tuple_list():
     return file_helper.read_test_values_tuple_list(file_path, ":")
 
 
+def replace_digits_testcases():
+    file_path = file_helper.puzzle_testcases_path(1, 2)
+    return file_helper.read_test_values_tuple_list(file_path, ":")
+
+
 class TestAoc1:
 
     @pytest.mark.parametrize("input_str, expected_value", puzzle1_tuple_list())
     def test_find_calibration_value(self, input_str, expected_value):
         assert aoc1.find_calibration_value(input_str) == expected_value
 
-    @pytest.mark.parametrize("input_string, expected_value",
-                             [("seventhree1eightztszfourfivesix", "7three1eightztszfourfive6"),
-                              ("five11eight1", "51181"),
-                              ("4nineeightseven2", "49eight72"),
-                              ("one", "1"),
-                              ("xtwo", "x2"),
-                              ("three", "3"),
-                              ("four", "4"),
-                              ("fivexas", "5xas"),
-                              ("12six", "126"),
-                              ("sevenLDAS", "7LDAS"),
-                              ("eight", "8"),
-                              ("nine", "9"),
-                              ("two1nine", "219"),
-                              ("eightwothree", "8wo3"),
-                              ("abcone2threexyz", "abc123xyz"),
-                              ("xtwone3four", "x2ne34"),
-                              ("zoneight234", "z1ight234"),
-                              ("7pqrstsixteen", "7pqrst6teen"), ])
+    @pytest.mark.parametrize("input_string, expected_value", replace_digits_testcases())
     def test_replace_written_digits(self, input_string, expected_value):
         assert aoc1.replace_written_digits(input_string) == expected_value
 
