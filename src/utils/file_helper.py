@@ -29,11 +29,11 @@ def puzzle_testcases_filename(day, testcase):
 
 
 def puzzle_testcases_path(day, testcase):
-    """
+    f"""
     Naming convention for the files containing the puzzle inputs: \n
         resources \n
         ├── day{day} \n
-        │   ├─ day{day}_testcases.txt \n
+        │   ├─ day{day}_testcases{testcase}.txt \n
 
     example: day1_testcases1.txt
     """
