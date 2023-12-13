@@ -5,8 +5,6 @@ import conftest  # this works despite pycharm thinking its unused
 from conftest import testfile1_delimiter
 
 
-
-
 def puzzle1_tuple_list():
     file_path = file_helper.puzzle_testcases_path(1, 1)
     return file_helper.read_test_values_tuple_list(file_path, ":")
@@ -15,17 +13,8 @@ def puzzle1_tuple_list():
 class TestAoc1:
 
     @pytest.mark.parametrize("input_str, expected_value", puzzle1_tuple_list())
-    def test_cali_value(self, input_str, expected_value):
+    def test_find_calibration_value(self, input_str, expected_value):
         assert aoc1.find_calibration_value(input_str) == expected_value
-
-    @pytest.mark.parametrize("input_string, expected_value",
-                             [("1abc2", "12"),
-                              ("pqr3stu8vwx", "38"),
-                              ("a1b2c3d4e5f", "15"),
-                              ("dajslasa", "00"),
-                              ("treb7uchet", "77"), ])
-    def test_multiple_find_calibration_value(self, input_string, expected_value):
-        assert aoc1.find_calibration_value(input_string) == expected_value
 
     @pytest.mark.parametrize("input_string, expected_value",
                              [("seventhree1eightztszfourfivesix", "7three1eightztszfourfive6"),
