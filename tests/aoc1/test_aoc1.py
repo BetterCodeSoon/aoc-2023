@@ -1,8 +1,6 @@
 import pytest
 import src.aoc1.aoc1 as aoc1
 import src.utils.file_helper as file_helper
-import conftest  # this works despite pycharm thinking its unused
-from conftest import testfile1_delimiter
 
 
 def puzzle1_tuple_list():
