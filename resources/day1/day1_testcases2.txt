@@ -23,9 +23,3 @@ fivexas:55
 sevenLDAS:77
 eight:8
 nine:9
-two1nine:29
-eightwothree:83
-abcone2threexyz:13
-xtwone3four:24
-zoneight234:14
-7pqrstsixteen:76
