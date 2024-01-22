@@ -81,7 +81,7 @@ def find_calibration_value(input_string):
 
 
 if __name__ == '__main__':
-    puzzle_path = file_helper.get_puzzle_input_path(1, 1)
+    puzzle_path = file_helper.puzzle_input_path(1, 1)
     file_lines = file_helper.read_file_lines(puzzle_path)
 
     ###debug_dict = {}
