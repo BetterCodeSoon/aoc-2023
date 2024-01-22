@@ -1,3 +1,9 @@
+six:6
+dbasix:6
+sixbaösaa:6
+seven:7
+dbaseven:7
+sevenbaösaa:7
 seventhree1eightztszfourfivesix:7three1eightztszfourfive6
 five11eight1:51181
 4nineeightseven2:49eight72
@@ -6,9 +12,6 @@ xtwo:x2
 three:3
 four:4
 fivexas:5xas
-six:6
-dbasix:6
-sixbaösaa:6
 12six:126
 sevenLDAS:7LDAS
 eight:8
