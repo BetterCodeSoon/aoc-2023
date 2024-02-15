@@ -29,16 +29,17 @@ class TestAoc1:
         assert aoc1.replace_written_digits(input_string) == expected_value
 
     @pytest.mark.parametrize("input_string, expected_value",
-                             [("two1nine", {'two': 0, 'nine': 4}),
-                              ("11two", {'two': 2}),
+                             [("two1nine", {'two': [0], 'nine': [4]}),
+                              ("11two", {'two': [2]}),
                               ("daksaslasa", {}),
                               ("111", {}),
-                              ("7pqrstsixteen", {'six': 6}), ])
+                              ("7pqrstsixteen", {'six': [6]}), ])
     def test_find_written_digits(self, input_string, expected_value):
         found_digits = aoc1.find_written_digits(input_string)
         assert found_digits == expected_value
 
-    @pytest.mark.parametrize("input_string, start_index, replacement_str, expected_value",
-                             [("testinputbla123", "4", "12345", "test12345bla123")])
-    def test_replace_str(self, input_string, start_index, replacement_str, expected_value):
-        assert aoc1.replace_str(input_string, int(start_index), replacement_str) == expected_value
+    @pytest.mark.parametrize("input_string, start_index, replacement_str, end_index, expected_value",
+                             [("testinputbla123", "4", "12345", "9", "test12345bla123"),
+                              ("testthreebla123", "4", "3", "9", "test3bla123")])
+    def test_replace_str(self, input_string, start_index, replacement_str, end_index, expected_value):
+        assert aoc1.replace_str(input_string, int(start_index), replacement_str, int(end_index)) == expected_value

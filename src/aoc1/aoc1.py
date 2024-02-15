@@ -35,25 +35,65 @@ def find_last_written_digit(written_digits_found_dict):
     return max(written_digits_found_dict, key=written_digits_found_dict.get)
 
 
-def replace_str(input_str, start_index, replacement_str):
-    end_index = start_index + len(replacement_str)
-    return "".join((input_str[:start_index], replacement_str, input_str[end_index:]))
+def replace_str(input_str, start_index, replacement_str, ending_index):
+    return "".join((input_str[:start_index], replacement_str, input_str[ending_index:]))
+
+
+def end_index(start_index, replacement_str):
+    return int(start_index + len(replacement_str))
+
+
+def lowest_index_digit(digits_found_dict):
+    if len(digits_found_dict) == 0:
+        raise Exception("digits_found_dict is empty")
+
+    # iterate through the value lists and find the minimum value
+    # and create a new dict containing the min for each key
+    min_digit_dict = {key: min(digits_found_dict[key]) for key in digits_found_dict}
+
+    key_with_min_value = find_first_written_digit(min_digit_dict)
+    lowest_index = min_digit_dict[key_with_min_value]
+
+    return [key_with_min_value, lowest_index]
+
+
+def highest_index_digit(digits_found_dict):
+    if len(digits_found_dict) == 0:
+        raise Exception("digits_found_dict is empty")
+
+    # iterate through the value lists and find the maximum value
+    # and create a new dict containing the min for each key
+    min_digit_dict = {key: max(digits_found_dict[key]) for key in digits_found_dict}
+
+    key_with_max_value = find_last_written_digit(min_digit_dict)
+    highest_index = min_digit_dict[key_with_max_value]
+
+    return [key_with_max_value, highest_index]
 
 
 def replace_written_digits(input_string):
     # cover case that there is no written digit
     replaced_digits_str = input_string
 
-    digits_found = find_written_digits(input_string)
-    if len(digits_found) != 0:
-        first_written_digit = find_first_written_digit(digits_found)
-        replaced_digits_str = input_string.replace(first_written_digit, WRITTEN_DIGITS[first_written_digit])
+    digits_found_dict = find_written_digits(input_string)
 
-        # check if there is another digit
-        digits_found = find_written_digits(replaced_digits_str)
-        if len(digits_found) != 0:
-            last_written_digit = find_last_written_digit(find_written_digits(replaced_digits_str))
-            replaced_digits_str = replaced_digits_str.replace(last_written_digit, WRITTEN_DIGITS[last_written_digit])
+    # get key with lowest index + the lowest index
+    if len(digits_found_dict) != 0:
+
+        first_written_digit, lowest_index = lowest_index_digit(digits_found_dict)
+
+        replaced_digits_str = replace_str(input_string, lowest_index, WRITTEN_DIGITS[first_written_digit],
+                                          end_index(lowest_index, first_written_digit))
+
+        digits_found_in_replaced_str_dict = find_written_digits(replaced_digits_str)
+
+        # cover case that there is no other written digit
+        if len(digits_found_in_replaced_str_dict) != 0:
+
+            last_written_digit, highest_index = highest_index_digit(digits_found_in_replaced_str_dict)
+
+            replaced_digits_str = replace_str(replaced_digits_str, highest_index, WRITTEN_DIGITS[last_written_digit],
+                                              end_index(highest_index, last_written_digit))
 
     return replaced_digits_str
 
