@@ -47,3 +47,15 @@ class TestAoc1:
     @pytest.mark.parametrize("input_string, expected_value", find_values_testcases())
     def test_find_values(self, input_string, expected_value):
         assert aoc1.find_values(input_string) == expected_value
+
+    @pytest.mark.parametrize("input_string, expected_value",
+                             # [key_with_max_value, highest_index]
+                             [({'two': [1, 39], 'nine': [35], 'three': [25]}, ["two", 1])])
+    def test_lowest_index_digit(self, input_string, expected_value):
+        assert aoc1.lowest_index_digit(input_string) == expected_value
+
+    @pytest.mark.parametrize("input_string, expected_value",
+                             # [key_with_max_value, highest_index]
+                             [({'five': [1, 39], 'nine': [35], 'three': [25]}, ["five", 39])])
+    def test_highest_index_digit(self, input_string, expected_value):
+        assert aoc1.highest_index_digit(input_string) == expected_value
