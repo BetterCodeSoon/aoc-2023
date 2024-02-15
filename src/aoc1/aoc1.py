@@ -29,7 +29,7 @@ def find_first_written_digit(written_digits_found_dict):
 
 def find_last_written_digit(written_digits_found_dict):
     """
-    :param written_digits_found_dict: the higher the value of a key the earlier it appears in the input string
+    :param written_digits_found_dict: the higher the value of a key the later it appears in the input string
     :return: key with the highest value
     """
     return max(written_digits_found_dict, key=written_digits_found_dict.get)
