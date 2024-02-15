@@ -13,7 +13,7 @@ def replace_digits_testcases():
     return file_helper.read_test_values_tuple_list(file_path, ":")
 
 
-def replace_str_testcases():
+def find_values_testcases():
     file_path = file_helper.puzzle_testcases_path(1, 3)
     return file_helper.read_test_values_tuple_list(file_path, ":")
 
@@ -43,3 +43,7 @@ class TestAoc1:
                               ("testthreebla123", "4", "3", "9", "test3bla123")])
     def test_replace_str(self, input_string, start_index, replacement_str, end_index, expected_value):
         assert aoc1.replace_str(input_string, int(start_index), replacement_str, int(end_index)) == expected_value
+
+    @pytest.mark.parametrize("input_string, expected_value", find_values_testcases())
+    def test_find_values(self, input_string, expected_value):
+        assert aoc1.find_values(input_string) == expected_value

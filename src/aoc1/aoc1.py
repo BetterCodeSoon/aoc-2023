@@ -89,7 +89,6 @@ def replace_written_digits(input_string):
 
         # cover case that there is no other written digit
         if len(digits_found_in_replaced_str_dict) != 0:
-
             last_written_digit, highest_index = highest_index_digit(digits_found_in_replaced_str_dict)
 
             replaced_digits_str = replace_str(replaced_digits_str, highest_index, WRITTEN_DIGITS[last_written_digit],
@@ -126,6 +125,11 @@ def find_calibration_value(input_string):
         second_digit = match.group(0)
 
     return first_digit + second_digit
+
+
+def find_values(input_str):
+    replaced_digits_str = replace_written_digits(input_str)
+    return find_calibration_value(replaced_digits_str)
 
 
 if __name__ == '__main__':
