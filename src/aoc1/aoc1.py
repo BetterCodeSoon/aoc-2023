@@ -63,10 +63,10 @@ def highest_index_digit(digits_found_dict):
 
     # iterate through the value lists and find the maximum value
     # and create a new dict containing the min for each key
-    min_digit_dict = {key: max(digits_found_dict[key]) for key in digits_found_dict}
+    max_digit_dict = {key: max(digits_found_dict[key]) for key in digits_found_dict}
 
-    key_with_max_value = find_last_written_digit(min_digit_dict)
-    highest_index = min_digit_dict[key_with_max_value]
+    key_with_max_value = find_last_written_digit(max_digit_dict)
+    highest_index = max_digit_dict[key_with_max_value]
 
     return [key_with_max_value, highest_index]
 
