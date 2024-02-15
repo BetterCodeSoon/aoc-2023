@@ -12,7 +12,11 @@ def find_written_digits(input_string):
     #     if result != -1:
     #         written_digits_found[key] = input_string.find(key)
 
-    return {key: input_string.find(key) for key in WRITTEN_DIGITS if key in input_string}
+    return {key: find_all_str_occurrences(input_string, key) for key in WRITTEN_DIGITS if key in input_string}
+
+
+def find_all_str_occurrences(input_string, search_str):
+    return [match.start() for match in re.finditer(search_str, input_string)]
 
 
 def find_first_written_digit(written_digits_found_dict):
@@ -31,8 +35,12 @@ def find_last_written_digit(written_digits_found_dict):
     return max(written_digits_found_dict, key=written_digits_found_dict.get)
 
 
-def replace_written_digits(input_string):
+def replace_str(input_str, start_index, replacement_str):
+    end_index = start_index + replacement_str.len()
+    return "".join((input_str[:start_index], replacement_str, input_str[end_index:]))
 
+
+def replace_written_digits(input_string):
     # cover case that there is no written digit
     replaced_digits_str = input_string
 
