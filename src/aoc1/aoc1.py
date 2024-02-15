@@ -36,7 +36,7 @@ def find_last_written_digit(written_digits_found_dict):
 
 
 def replace_str(input_str, start_index, replacement_str):
-    end_index = start_index + replacement_str.len()
+    end_index = start_index + len(replacement_str)
     return "".join((input_str[:start_index], replacement_str, input_str[end_index:]))
 
 
