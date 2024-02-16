@@ -29,6 +29,11 @@ class TestAoc1:
         assert aoc1.replace_written_digits(input_string) == expected_value
 
     @pytest.mark.parametrize("input_string, expected_value",
+                             [("abc123def456", [3, 4, 5, 9, 10, 11])])
+    def test_find_digits(self, input_string, expected_value):
+        assert aoc1.find_digits(input_string) == expected_value
+
+    @pytest.mark.parametrize("input_string, expected_value",
                              [("two1nine", {'two': [0], 'nine': [4]}),
                               ("11two", {'two': [2]}),
                               ("daksaslasa", {}),

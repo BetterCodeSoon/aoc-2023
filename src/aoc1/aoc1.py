@@ -5,6 +5,10 @@ WRITTEN_DIGITS = {"one": "1", "two": "2", "three": "3", "four": "4", "five": "5"
                   "six": "6", "seven": "7", "eight": "8", "nine": "9"}
 
 
+def find_digits(input_string):
+    return [index for index, char in enumerate(input_string) if char.isdigit()]
+
+
 def find_written_digits(input_string):
     # written_digits_found = {}
     # for key in WRITTEN_DIGITS:
