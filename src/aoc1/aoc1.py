@@ -75,6 +75,11 @@ def highest_index_digit(digits_found_dict):
     return [key_with_max_value, highest_index]
 
 
+def replace_written_digit(input_string, written_digit, digit_start_index):
+    return replace_str(input_string, digit_start_index, WRITTEN_DIGITS[written_digit],
+                       end_index(digit_start_index, written_digit))
+
+
 def replace_written_digits(input_string):
     # cover case that there is no written digit
     replaced_digits_str = input_string

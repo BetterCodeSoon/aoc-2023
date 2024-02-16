@@ -49,6 +49,12 @@ class TestAoc1:
     def test_replace_str(self, input_string, start_index, replacement_str, end_index, expected_value):
         assert aoc1.replace_str(input_string, int(start_index), replacement_str, int(end_index)) == expected_value
 
+    @pytest.mark.parametrize("input_string, written_digit, digit_start_index, expected_value",
+                             [("testthreebla123", "three", 4, "test3bla123"),
+                              ("onethreebla123", "one", 0, "1threebla123")])
+    def test_replace_written_digit(self, input_string, written_digit, digit_start_index, expected_value):
+        assert aoc1.replace_written_digit(input_string, written_digit, digit_start_index) == expected_value
+
     @pytest.mark.parametrize("input_string, expected_value", find_values_testcases())
     def test_find_values(self, input_string, expected_value):
         assert aoc1.find_values(input_string) == expected_value
