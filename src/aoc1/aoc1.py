@@ -10,12 +10,6 @@ def find_digits(input_string):
 
 
 def find_written_digits(input_string):
-    # written_digits_found = {}
-    # for key in WRITTEN_DIGITS:
-    #     result = input_string.find(key)
-    #     if result != -1:
-    #         written_digits_found[key] = input_string.find(key)
-
     return {key: find_all_str_occurrences(input_string, key) for key in WRITTEN_DIGITS if key in input_string}
 
 
@@ -179,15 +173,11 @@ if __name__ == '__main__':
     puzzle_path = file_helper.puzzle_input_path(1, 1)
     file_lines = file_helper.read_file_lines(puzzle_path)
 
-    ###debug_dict = {}
-
     calibration_values = []
     for line in file_lines:
         # replace the first and last occurrence of a written digit
         replaced_written_digits = replace_written_digits(line, 0)
         # find the first and last occurrence of a digit and collect its int value
         calibration_values.append(int(find_calibration_value(replaced_written_digits)))
-        ###debug_dict[line] = int(find_calibration_value(replaced_written_digits))
 
-    ###s = sum(debug_dict.values())
     print(f"The total calibration sum = {sum(calibration_values)}\n")
