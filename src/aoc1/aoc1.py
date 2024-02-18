@@ -80,30 +80,64 @@ def replace_written_digit(input_string, written_digit, digit_start_index):
                        end_index(digit_start_index, written_digit))
 
 
-def replace_written_digits(input_string):
-    # cover case that there is no written digit
-    replaced_digits_str = input_string
+def not_empty(digit_datastructure):
+    if len(digit_datastructure) != 0:
+        return True
+    return False
 
-    digits_found_dict = find_written_digits(input_string)
 
-    # get key with lowest index + the lowest index
-    if len(digits_found_dict) != 0:
+def replace_first_written_digit(input_string, written_digits_dict):
+    first_written_digit, lowest_index = lowest_index_digit(written_digits_dict)
 
-        first_written_digit, lowest_index = lowest_index_digit(digits_found_dict)
+    return replace_str(input_string, lowest_index, WRITTEN_DIGITS[first_written_digit],
+                       end_index(lowest_index, first_written_digit))
 
-        replaced_digits_str = replace_str(input_string, lowest_index, WRITTEN_DIGITS[first_written_digit],
-                                          end_index(lowest_index, first_written_digit))
 
-        digits_found_in_replaced_str_dict = find_written_digits(replaced_digits_str)
+def replace_last_written_digit(input_string, written_digits_dict):
+    last_written_digit, written_digit_highest_index = highest_index_digit(written_digits_dict)
 
-        # cover case that there is no other written digit
-        if len(digits_found_in_replaced_str_dict) != 0:
-            last_written_digit, highest_index = highest_index_digit(digits_found_in_replaced_str_dict)
+    return replace_str(input_string, written_digit_highest_index, WRITTEN_DIGITS[last_written_digit],
+                       end_index(written_digit_highest_index, last_written_digit))
 
-            replaced_digits_str = replace_str(replaced_digits_str, highest_index, WRITTEN_DIGITS[last_written_digit],
-                                              end_index(highest_index, last_written_digit))
 
-    return replaced_digits_str
+def replace_written_digits(input_string, digit_count):
+    # find all digits
+    digit_list = find_digits(input_string)
+    digit_exists = not_empty(digit_list)
+
+    # find all written digits
+    written_digits_dict = find_written_digits(input_string)
+    written_digit_exists = not_empty(written_digits_dict)
+
+    if not digit_exists and not written_digit_exists:
+        return input_string
+
+    if digit_exists and not written_digit_exists:
+        return input_string
+
+    if digit_count == 0:
+        if not digit_exists and written_digit_exists:
+            return replace_written_digits(replace_first_written_digit(input_string, written_digits_dict), 1)
+
+        min_digit_index = min(digit_list)
+        first_written_digit, written_digit_lowest_index = lowest_index_digit(written_digits_dict)
+
+        if min_digit_index < written_digit_lowest_index:
+            return replace_written_digits(input_string, 1)
+
+        return replace_written_digits(replace_first_written_digit(input_string, written_digits_dict), 1)
+
+    if digit_count == 1:
+        if not digit_exists and written_digit_exists:
+            return replace_last_written_digit(input_string, written_digits_dict)
+
+        max_digit_index = max(digit_list)
+        last_written_digit, written_digit_highest_index = highest_index_digit(written_digits_dict)
+
+        if max_digit_index > written_digit_highest_index:
+            return input_string
+
+        return replace_last_written_digit(input_string, written_digits_dict)
 
 
 def find_calibration_value(input_string):
@@ -137,7 +171,7 @@ def find_calibration_value(input_string):
 
 
 def find_values(input_str):
-    replaced_digits_str = replace_written_digits(input_str)
+    replaced_digits_str = replace_written_digits(input_str, 0)
     return find_calibration_value(replaced_digits_str)
 
 
@@ -150,7 +184,7 @@ if __name__ == '__main__':
     calibration_values = []
     for line in file_lines:
         # replace the first and last occurrence of a written digit
-        replaced_written_digits = replace_written_digits(line)
+        replaced_written_digits = replace_written_digits(line, 0)
         # find the first and last occurrence of a digit and collect its int value
         calibration_values.append(int(find_calibration_value(replaced_written_digits)))
         ###debug_dict[line] = int(find_calibration_value(replaced_written_digits))

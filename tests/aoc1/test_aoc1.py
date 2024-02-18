@@ -26,7 +26,7 @@ class TestAoc1:
 
     @pytest.mark.parametrize("input_string, expected_value", replace_digits_testcases())
     def test_replace_written_digits(self, input_string, expected_value):
-        assert aoc1.replace_written_digits(input_string) == expected_value
+        assert aoc1.replace_written_digits(input_string, 0) == expected_value
 
     @pytest.mark.parametrize("input_string, expected_value",
                              [("abc123def456", [3, 4, 5, 9, 10, 11])])
@@ -54,6 +54,18 @@ class TestAoc1:
                               ("onethreebla123", "one", 0, "1threebla123")])
     def test_replace_written_digit(self, input_string, written_digit, digit_start_index, expected_value):
         assert aoc1.replace_written_digit(input_string, written_digit, digit_start_index) == expected_value
+
+    @pytest.mark.parametrize("input_string, written_digits_dict, expected_value",
+                             [("2bthree", {'three': [2]}, "2b3"),
+                              ("two234two", {'two': [0, 6]}, "2234two")])
+    def test_replace_first_written_digit(self, input_string, written_digits_dict, expected_value):
+        assert aoc1.replace_first_written_digit(input_string, written_digits_dict) == expected_value
+
+    @pytest.mark.parametrize("input_string, written_digits_dict, expected_value",
+                             [("2bthree", {'three': [2]}, "2b3"),
+                              ("two234two", {'two': [0, 6]}, "two2342")])
+    def test_replace_last_written_digit(self, input_string, written_digits_dict, expected_value):
+        assert aoc1.replace_last_written_digit(input_string, written_digits_dict) == expected_value
 
     @pytest.mark.parametrize("input_string, expected_value", find_values_testcases())
     def test_find_values(self, input_string, expected_value):
