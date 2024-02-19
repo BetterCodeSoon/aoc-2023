@@ -1,4 +1,4 @@
-from aoc2.CubeContainer import CubeContainer
+from aoc2.cube_container import CubeContainer
 
 
 class Bag(CubeContainer):
