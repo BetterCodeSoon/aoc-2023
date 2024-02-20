@@ -41,3 +41,6 @@ class ElfGame:
 
     def max_blue_value(self):
         return max(game_set.blue for game_set in self.game_sets if game_set.blue > 0)
+
+    def calc_power(self):
+        return self.max_red_value() * self.max_green_value() * self.max_blue_value()

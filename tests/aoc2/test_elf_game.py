@@ -74,3 +74,12 @@ class TestElfGame:
                              elf_game_expected_max_color_list(max_color_testcases_dict(), 'B'))
     def test_max_blue_value(self, input_elf_game, expected):
         assert input_elf_game.max_blue_value() == expected
+
+    @pytest.mark.parametrize("input_elf_game, expected",
+                             [(input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                               48),
+                              (input_helper.str_to_elf_game(
+                                  "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red"),
+                               1560)])
+    def test_calc_power(self, input_elf_game, expected):
+        assert input_elf_game.calc_power() == expected
