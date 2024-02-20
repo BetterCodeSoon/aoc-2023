@@ -13,3 +13,6 @@ class CubeContainer:
 
     def __eq__(self, other):
         return self.red == other.red and self.green == other.green and self.blue == other.blue
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
