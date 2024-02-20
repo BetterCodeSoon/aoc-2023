@@ -3,12 +3,6 @@ import src.aoc2.input_helper as input_helper
 from src.aoc2.bag import Bag
 from src.aoc2.elf_game import ElfGame
 
-
-def evaluate_game(elf_game: ElfGame, bag: Bag) -> bool:
-    # toDo check and remove redudant function and test
-    return elf_game.possible_game(bag)
-
-
 if __name__ == '__main__':
     id_sum = 0
     power_sum = 0

@@ -29,16 +29,31 @@ def elf_game_expected_max_color_list(color_testcases_dict, key):
     return color_testcases_dict[key]
 
 
+def read_example_testcases() -> [(ElfGame, bool)]:
+    """
+    e.g. for input: "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green#1" \n\n
+    return  [(ElfGame(1, [CubeContainer(4, 0, 3), CubeContainer(1, 2, 6), CubeContainer(0, 2, 6)], True)]  \n
+    """
+    file_path = file_helper.puzzle_testcases_path(2, 1)
+    game_tuple_list = file_helper.read_test_values_tuple_list(file_path, ":")
+
+    elf_game_eval_list = []
+
+    for input_tuple in game_tuple_list:
+        game_id = input_helper.read_game_id(input_tuple[0])
+        game_sets_str, correct_evaluation = input_tuple[1].split("#")
+        game_sets = input_helper.read_game_sets_list(game_sets_str)
+
+        elf_game_eval_list.append((ElfGame(game_id, game_sets), bool(int(correct_evaluation))))
+
+    return elf_game_eval_list
+
+
 class TestElfGame:
 
-    @pytest.mark.parametrize("input_game, expected_value",
-                             [(ElfGame(1, [CubeContainer(12, 0, 3), CubeContainer(4, 13, 3), CubeContainer(4, 0, 14)]),
-                               True),
-                              (ElfGame(2, [CubeContainer(20, 13, 14), CubeContainer(12, 20, 14),
-                                           CubeContainer(12, 13, 20)]),
-                               False)])
-    def test_possible_game(self, input_game, aoc2_bag, expected_value):
-        assert input_game.possible_game(aoc2_bag) == expected_value
+    @pytest.mark.parametrize("input_game, expected", read_example_testcases())
+    def test_possible_game(self, input_game, aoc2_bag, expected):
+        assert input_game.possible_game(aoc2_bag) == expected
 
     @pytest.mark.parametrize("elf_game1, elf_game2, expected",
                              [(input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
