@@ -1,7 +1,7 @@
 from typing import List
 
-from aoc2.bag import Bag
-from aoc2.cube_container import CubeContainer
+from src.aoc2.bag import Bag
+from src.aoc2.cube_container import CubeContainer
 
 
 class ElfGame:

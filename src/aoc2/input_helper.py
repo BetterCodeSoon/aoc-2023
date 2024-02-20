@@ -1,4 +1,4 @@
-from aoc2.cube_container import CubeContainer
+from src.aoc2.cube_container import CubeContainer
 
 R = "red"
 G = "green"
