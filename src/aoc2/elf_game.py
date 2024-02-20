@@ -5,9 +5,8 @@ from aoc2.cube_container import CubeContainer
 
 
 class ElfGame:
-
     game_id: int
-    game_sets: [CubeContainer, CubeContainer, CubeContainer]
+    game_sets: [CubeContainer]
 
     def __init__(self, game_id: int, game_sets: List[CubeContainer]):
         if game_id is None or game_id <= 0:
@@ -16,8 +15,8 @@ class ElfGame:
         if any(game_set is None for game_set in game_sets):
             raise ValueError("Invalid game sets. At least one of the sets is not initialized.")
 
-        if len(game_sets) != 3:
-            raise Exception(f"The list of game sets does not contain exactly three sets. Its size is {len(game_sets)}")
+        if len(game_sets) == 0:
+            raise Exception(f"The list of game sets does not contain a sets. Its size is {len(game_sets)}")
 
         self.game_id = game_id
         self.game_sets = game_sets
