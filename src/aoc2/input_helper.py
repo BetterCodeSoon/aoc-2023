@@ -1,8 +1,4 @@
-from src.aoc2.cube_container import CubeContainer
-
-R = "red"
-G = "green"
-B = "blue"
+from src.aoc2.cube_container import CubeContainer, R, G, B
 
 
 def read_game_sets_list(input_string, delimiter="; ") -> [CubeContainer]:
