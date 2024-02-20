@@ -30,9 +30,9 @@ class TestFileHelper:
         expected_path = file_helper.PROJECT_ROOT / "resources" / f"day{day}" / filename
         assert expected_path == file_helper.puzzle_input_path(day, puzzle_nr)
 
-    def test_read_file_lines(self, testfile1_path, testfile1_content_lines):
+    def test_read_file_lines(self, testfile1_path, file_helper_testfile1_content_lines):
         file_content = file_helper.read_file_lines(testfile1_path)
-        assert file_content == testfile1_content_lines
+        assert file_content == file_helper_testfile1_content_lines
 
     def test_read_expected_values(self, testfile1_path, testfile1_delimiter, testfile1_dict):
         result_dict = file_helper.read_expected_values(testfile1_path, testfile1_delimiter)
