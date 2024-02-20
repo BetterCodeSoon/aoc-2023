@@ -1,3 +1,4 @@
+from src.aoc2.elf_game import ElfGame
 from src.aoc2.cube_container import CubeContainer, R, G, B
 
 
@@ -41,3 +42,16 @@ def read_game_id(game_str, delimiter=" ") -> int:
     """
     temp, game_id = game_str.split(delimiter)
     return int(game_id)
+
+
+def str_to_elf_game(elf_game_str: str) -> ElfGame:
+    """
+    e.g. Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+    # --> ElfGame(1, ... )
+    """
+    game_id_values_list = elf_game_str.split(": ")
+
+    game_id = read_game_id(game_id_values_list[0])
+    game_sets = read_game_sets_list(game_id_values_list[1])
+
+    return ElfGame(game_id, game_sets)

@@ -1,7 +1,7 @@
 import pytest
-
-import aoc2.input_helper as input_helper
-from aoc2.cube_container import CubeContainer
+import src.aoc2.input_helper as input_helper
+from src.aoc2.cube_container import CubeContainer
+from src.aoc2.elf_game import ElfGame
 
 
 class TestInputHelper:
@@ -28,3 +28,9 @@ class TestInputHelper:
     @pytest.mark.parametrize("game_str, expected", [("Game 1", 1), ("Game 124", 124)])
     def test_read_game_id(self, game_str, expected):
         assert input_helper.read_game_id(game_str, " ") == expected
+
+    @pytest.mark.parametrize("game_str, expected",
+                             [("Game 1: 3 blue, 4 red; 1 red, 2 green",
+                               ElfGame(1, [CubeContainer(4, 0, 3), CubeContainer(1, 2, 0)]))])
+    def test_str_to_elf_game(self, game_str, expected):
+        assert input_helper.str_to_elf_game(game_str) == expected
