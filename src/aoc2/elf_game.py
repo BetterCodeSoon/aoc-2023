@@ -33,11 +33,11 @@ class ElfGame:
             return False
         return True
 
-    def min_red_value(self):
-        return min(game_set.red for game_set in self.game_sets)
+    def max_red_value(self):
+        return max(game_set.red for game_set in self.game_sets if game_set.red > 0)
 
-    def min_green_value(self):
-        return min(game_set.green for game_set in self.game_sets)
+    def max_green_value(self):
+        return max(game_set.green for game_set in self.game_sets if game_set.green > 0)
 
-    def min_blue_value(self):
-        return min(game_set.blue for game_set in self.game_sets)
+    def max_blue_value(self):
+        return max(game_set.blue for game_set in self.game_sets if game_set.blue > 0)
