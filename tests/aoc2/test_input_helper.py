@@ -24,3 +24,7 @@ class TestInputHelper:
          [CubeContainer(20, 8, 6), CubeContainer(4, 13, 5), CubeContainer(1, 5, 0)])])
     def test_read_game_sets_list(self, input_string, expected):
         assert input_helper.read_game_sets_list(input_string) == expected
+
+    @pytest.mark.parametrize("game_str, expected", [("Game 1", 1), ("Game 124", 124)])
+    def test_read_game_id(self, game_str, expected):
+        assert input_helper.read_game_id(game_str, " ") == expected
