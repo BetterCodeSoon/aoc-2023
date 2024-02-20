@@ -1,5 +1,4 @@
 from typing import List
-
 from src.aoc2.bag import Bag
 from src.aoc2.cube_container import CubeContainer
 
