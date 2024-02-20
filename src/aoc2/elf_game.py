@@ -20,9 +20,24 @@ class ElfGame:
         self.game_id = game_id
         self.game_sets = game_sets
 
+    def __eq__(self, other):
+        return self.game_id == other.game_id and self.game_sets == other.game_sets
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
     def possible_game(self, bag: Bag):
         # look in the bag remove the colored cubes for each game set
         # the game is ONLY possible if there are 0 or more cubes left in the bag
         if any(not bag.reveal_cubes_possible(game_set) for game_set in self.game_sets):
             return False
         return True
+
+    def min_red_value(self):
+        return min(game_set.red for game_set in self.game_sets)
+
+    def min_green_value(self):
+        return min(game_set.green for game_set in self.game_sets)
+
+    def min_blue_value(self):
+        return min(game_set.blue for game_set in self.game_sets)
