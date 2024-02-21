@@ -33,14 +33,14 @@ class ElfGame:
             return False
         return True
 
-    def max_red_value(self):
+    def max_red_value(self) -> int:
         return max(game_set.red for game_set in self.game_sets if game_set.red > 0)
 
-    def max_green_value(self):
+    def max_green_value(self) -> int:
         return max(game_set.green for game_set in self.game_sets if game_set.green > 0)
 
-    def max_blue_value(self):
+    def max_blue_value(self) -> int:
         return max(game_set.blue for game_set in self.game_sets if game_set.blue > 0)
 
-    def calc_power(self):
+    def calc_power(self) -> int:
         return self.max_red_value() * self.max_green_value() * self.max_blue_value()
