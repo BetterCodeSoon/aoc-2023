@@ -6,7 +6,11 @@ from utils.input.input_line import InputLine
 class TestInputLine:
 
     @pytest.mark.parametrize("input_str, expected_line, expected_exist, expected_values",
-                             [("something| b1, b2", "something", True, ["b1", "b2"])])
+                             [("something| b1, b2", "something", True, ["b1", "b2"]),
+                              ("something| b1 , b2   ", "something", True, ["b1", "b2"]),
+                              ("something| b1", "something", True, ["b1"]),
+                              ("something|", "something", False, []),
+                              ("something", "something", False, [])])
     def test_input_line_initialization(self, input_str, expected_line, expected_exist, expected_values):
         input_line = InputLine(input_str)
         assert input_line.line_str
@@ -20,3 +24,11 @@ class TestInputLine:
                               (InputLine("bla| b1, b2"), InputLine("bla| x1"), False)])
     def test_equality(self, input_line1, input_line2, expected):
         assert (input_line1 == input_line2) is expected
+
+    @pytest.mark.parametrize("input_line1, input_line2, expected",
+                             [(InputLine("bla| b1, b2"), InputLine("bla| b1, b2"), False),
+                              (InputLine("bla| b1, b2"), InputLine("bla"), True),
+                              (InputLine("bla| b1, b2"), InputLine("bla| "), True),
+                              (InputLine("bla| b1, b2"), InputLine("bla| x1"), True)])
+    def test_inequality(self, input_line1, input_line2, expected):
+        assert (input_line1 != input_line2) is expected

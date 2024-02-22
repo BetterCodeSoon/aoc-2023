@@ -5,6 +5,15 @@ class InputLine:
 
     def __init__(self, input_str: str, delimiter: str = '| ', value_separator: str = ', ',
                  strip_trailing_spaces: bool = True):
+        """
+        e.g. for a line in a File: "something| b1, b2" the class would look like this: \n\n
+
+        :param input_str: "something" in the above example
+        :param delimiter: "| " in the above example aka what separates input string from expected values
+        :param value_separator: what separates "b1, b2" aka ", "
+        :param strip_trailing_spaces: IF True then "b1 , b2   " is turned to ["b1", "b2"] otherwise ["b1 ", "b2   "]
+        """
+
         if input_str is None:
             raise Exception(f"input string is None")
 
