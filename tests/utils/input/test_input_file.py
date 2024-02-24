@@ -1,11 +1,8 @@
 import pytest
 
+from src import TYPE_TESTCASE, TYPE_PUZZLE
 from src.utils import file_helper
 from src.utils.input.input_file import InputFile
-from src.utils.input.input_type import InputType
-
-TYPE_PUZZLE = InputType.TYPE_PUZZLE
-TYPE_TESTCASE = InputType.TYPE_TESTCASE
 
 
 class TestInputFile:

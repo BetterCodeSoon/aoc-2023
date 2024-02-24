@@ -1,11 +1,8 @@
 from pathlib import Path
 
+from src import VALID_TYPES, TYPE_TESTCASE, TYPE_PUZZLE
 from src.utils import file_helper
 from src.utils.input.input_line import InputLine
-from src.utils.input.input_type import InputType
-
-TYPE_PUZZLE = InputType.TYPE_PUZZLE
-TYPE_TESTCASE = InputType.TYPE_TESTCASE
 
 
 class InputFile:
@@ -17,7 +14,7 @@ class InputFile:
         if file_type is None:
             raise Exception(f"Ahhh panic!!! The file type is None! x_x")
 
-        if file_type not in [TYPE_PUZZLE, TYPE_TESTCASE]:
+        if file_type not in VALID_TYPES:
             raise ValueError(f"The file type: {file_type} is not a valid type")
 
         self.file_path = self._get_path(file_type, day, file_number)
