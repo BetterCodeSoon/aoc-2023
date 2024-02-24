@@ -9,11 +9,11 @@ class TestInputLine:
                              [("something| b1, b2", "something", True, ["b1", "b2"]),
                               ("something| b1 , b2   ", "something", True, ["b1", "b2"]),
                               ("something| b1", "something", True, ["b1"]),
-                              ("something|", "something", False, []),
+                              ("something| ", "something", False, []),
                               ("something", "something", False, [])])
     def test_input_line_initialization(self, input_str, expected_line, expected_exist, expected_values):
         input_line = InputLine(input_str)
-        assert input_line.line_str
+        assert input_line.line_str == expected_line
         assert input_line.has_expected_values is expected_exist
         assert input_line.expected_values_list == expected_values
 

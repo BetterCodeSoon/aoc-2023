@@ -20,6 +20,7 @@ class InputLine:
         expected_str = None
         if delimiter in input_str:
             self.line_str, expected_str = input_str.split(delimiter)
+            self.line_str = self.line_str.replace(delimiter, "")  # in case expected_str is empty
         else:
             self.line_str = input_str
 
