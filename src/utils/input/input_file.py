@@ -28,3 +28,9 @@ class InputFile:
             return file_helper.puzzle_testcases_path(day, file_number)
         else:
             raise Exception(f"Cannot create path for file type: {file_type}")
+
+    def __eq__(self, other):
+        return self.file_path == other.file_path and self.file_lines == other.file_lines
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
