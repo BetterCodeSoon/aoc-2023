@@ -2,12 +2,9 @@ from pathlib import Path
 
 from src import VALID_TYPES, TYPE_TESTCASE, TYPE_PUZZLE
 from src.utils import file_helper
-from src.utils.input.input_line import InputLine
 
 
 class InputFile:
-    file_path: Path
-    file_lines = [InputLine]
 
     def __init__(self, file_type: str, day: int, file_number: int, comment_marker: str = '#'):
 
@@ -17,8 +14,8 @@ class InputFile:
         if file_type not in VALID_TYPES:
             raise ValueError(f"The file type: {file_type} is not a valid type")
 
-        self.file_path = self._get_path(file_type, day, file_number)
-        self.file_lines = file_helper.read_file_lines(self.file_path, comment_marker)
+        self.file_path: Path = self._get_path(file_type, day, file_number)
+        self.file_lines: [str] = file_helper.read_file_lines(self.file_path, comment_marker)
 
     @staticmethod
     def _get_path(file_type: str, day: int, file_number: int):

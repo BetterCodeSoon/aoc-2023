@@ -5,7 +5,21 @@ from src.utils import file_helper
 from src.utils.input.input_file import InputFile
 
 
+def expected_file_lines(file_type: str):
+    expected_file_lines_dict = {
+        TYPE_PUZZLE: [".........874.772...........787..........556", ".......*..*.......314............308......."],
+        TYPE_TESTCASE: ["467..114..| 144", "...*......", "..11.+.58.| 11, 58"]}
+    return expected_file_lines_dict[file_type]
+
+
 class TestInputFile:
+
+    @pytest.mark.parametrize("file_type, day, file_number, comment_marker",
+                             [(TYPE_PUZZLE, 0, 1, '#'),
+                              (TYPE_TESTCASE, 0, 1, '~')])
+    def test_input_file_initialization(self, file_type, day, file_number, comment_marker):
+        input_file = InputFile(file_type, 0, 1, comment_marker)
+        assert input_file.file_lines == expected_file_lines(file_type)
 
     @pytest.mark.parametrize("file_type, day, file_number, expected",
                              [(TYPE_PUZZLE, 0, 1, file_helper.puzzle_input_path(0, 1)),
