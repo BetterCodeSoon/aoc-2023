@@ -38,3 +38,12 @@ class TestInputFile:
                               (InputFile(TYPE_PUZZLE, 0, 1), InputFile(TYPE_TESTCASE, 0, 1), True)])
     def test_inequality(self, input_file1, input_file2, expected):
         assert (input_file1 != input_file2) is expected
+
+    def test_hash(self):
+        day = 0
+        number = 1
+        file_lines = expected_file_lines(TYPE_TESTCASE)
+        file_path = InputFile._get_path(TYPE_TESTCASE, day, number)
+        input_file = InputFile(TYPE_TESTCASE, 0, 1, "~")
+
+        assert input_file.__hash__() == hash((file_path, tuple(file_lines)))

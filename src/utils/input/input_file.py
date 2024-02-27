@@ -27,7 +27,12 @@ class InputFile:
             raise Exception(f"Cannot create path for file type: {file_type}")
 
     def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            raise Exception(f"Cannot compare other of type: {type(other)} to class type: {type(self)}")
         return self.file_path == other.file_path and self.file_lines == other.file_lines
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash((self.file_path, tuple(self.file_lines)))
