@@ -14,13 +14,13 @@ class InputLine:
 
         self.delimiter = delimiter
         self.strip_trailing_whitespaces = strip_trailing_whitespaces
-        self.next_line_parts: str = ""
+        self.next_line_part: str = ""
 
         if delimiter != "" and delimiter in input_str:
             self._split_line_str(input_str)
 
     def has_parts(self):
-        if len(self.next_line_parts) > 0:
+        if len(self.next_line_part) > 0:
             return True
         return False
 
@@ -31,17 +31,17 @@ class InputLine:
             parts = strip_list_items(parts)
 
         self.line_str = parts[0]
-        self.next_line_parts = parts[1:][0]
+        self.next_line_part = parts[1:][0]
 
         if self.strip_trailing_whitespaces:
             self.line_str = self.line_str.strip()
-            self.next_line_parts = self.next_line_parts.strip()
+            self.next_line_part = self.next_line_part.strip()
 
     def __eq__(self, other):
         return (self.line_str == other.line_str
                 and self.delimiter == other.delimiter
                 and self.strip_trailing_whitespaces == other.strip_trailing_whitespaces
-                and self.next_line_parts == other.next_line_parts)
+                and self.next_line_part == other.next_line_part)
 
     def __ne__(self, other):
         return not self.__eq__(other)

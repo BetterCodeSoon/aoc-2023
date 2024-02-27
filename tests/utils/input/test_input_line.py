@@ -19,7 +19,7 @@ class TestInputLine:
         input_line = InputLine(input_str, "|", True)
         assert input_line.line_str == expected_line
         assert input_line.has_parts() is expected_has_parts
-        assert input_line.next_line_parts == expected_parts
+        assert input_line.next_line_part == expected_parts
 
     @pytest.mark.parametrize("input_line1, input_line2, expected",
                              [(create_l("bla| b1, b2"), create_l("bla| b1, b2"), True),
