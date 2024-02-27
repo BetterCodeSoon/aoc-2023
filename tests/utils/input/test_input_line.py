@@ -36,3 +36,11 @@ class TestInputLine:
                               (create_l("bla| b1, b2"), create_l("bla| x1"), True)])
     def test_inequality(self, input_line1, input_line2, expected):
         assert (input_line1 != input_line2) is expected
+
+    def test_hash(self):
+        input_str = "bla"
+        line_str = input_str
+        next_line_part = ""
+        delimiter = ""
+        strip = True
+        assert InputLine(input_str, delimiter, strip).__hash__() == hash((line_str, next_line_part, delimiter, strip))

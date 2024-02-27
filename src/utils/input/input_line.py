@@ -38,6 +38,8 @@ class InputLine:
             self.next_line_part = self.next_line_part.strip()
 
     def __eq__(self, other):
+        if not isinstance(other, type(self)):
+            raise Exception(f"Cannot compare other of type: {type(other)} to class type: {type(self)}")
         return (self.line_str == other.line_str
                 and self.delimiter == other.delimiter
                 and self.strip_trailing_whitespaces == other.strip_trailing_whitespaces
@@ -45,3 +47,6 @@ class InputLine:
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash((self.line_str, self.next_line_part, self.delimiter, self.strip_trailing_whitespaces))
