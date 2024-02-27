@@ -1,10 +1,12 @@
 import pytest
 
-from utils.input.input_line import InputLine
-from utils.input.puzzle_input_file import PuzzleInputFile
+from src import TYPE_PUZZLE
+from src.utils.input.input_line import InputLine
+from src.utils.input.puzzle_input_file import PuzzleInputFile
+from tests.utils.input.test_input_file import expected_file_lines
 
 
-def expected_puzzle_input_lines():
+def expected_puzzle_input_lines() -> [InputLine]:
     # expected content for day0_puzzle1_input.txt
     return [InputLine(".........874.772...........787..........556"),
             InputLine(".......*..*.......314............308.......")]
@@ -29,3 +31,13 @@ class TestPuzzleInputFile:
                               (PuzzleInputFile(0, 1), PuzzleInputFile(0, 2), True)])
     def test_inequality(self, input_file1, input_file2, expected):
         assert (input_file1 != input_file2) is expected
+
+    def test_hash(self):
+        day = 0
+        number = 1
+        comment_marker = "#"
+        file_path = PuzzleInputFile._get_path(TYPE_PUZZLE, day, number)
+        puzzle_file = PuzzleInputFile(day, number, comment_marker)
+
+        assert puzzle_file.__hash__() == hash(
+            (file_path, tuple(expected_file_lines(TYPE_PUZZLE)), tuple(expected_puzzle_input_lines())))
