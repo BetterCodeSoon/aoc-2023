@@ -57,3 +57,7 @@ class TestAdjacentCells:
                              ])
     def test_inequality(self, adjacent_cell1, adjacent_cell2, expected):
         assert (adjacent_cell1 != adjacent_cell2) == expected
+
+    def test_hash(self):
+        assert AdjacentCells(Coords(0, 0), self.max_x, self.max_y).__hash__() == hash(
+            tuple({6: Coords(x=1, y=0), 2: Coords(x=0, y=1), 3: Coords(x=1, y=1)}))

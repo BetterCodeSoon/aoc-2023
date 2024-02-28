@@ -1,10 +1,8 @@
-from dataclasses import dataclass
-
-
-@dataclass
 class Coordinates2d:
-    x: int
-    y: int
+
+    def __init__(self, x: int, y: int):
+        self.x: int = x
+        self.y: int = y
 
     def __eq__(self, other):
         if not isinstance(other, type(self)):
@@ -13,3 +11,6 @@ class Coordinates2d:
 
     def __ne__(self, other):
         return not self.__eq__(other)
+
+    def __hash__(self):
+        return hash((self.x, self.y))

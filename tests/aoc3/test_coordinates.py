@@ -14,3 +14,6 @@ class TestCoordinates:
                                                           (Coordinates2d(1, 1), Coordinates2d(2, 2), True)])
     def test_inequality(self, coord1, coord2, expected):
         assert (coord1 != coord2) == expected
+
+    def test_hash(self):
+        assert Coordinates2d(1, 1).__hash__() == hash((1, 1))
