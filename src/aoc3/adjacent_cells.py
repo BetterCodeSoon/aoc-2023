@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from src.aoc3 import Coords
 
 
