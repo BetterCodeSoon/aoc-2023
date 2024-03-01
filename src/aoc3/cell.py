@@ -13,7 +13,7 @@ class Cell:
             raise ValueError("The cell element is None!")
 
         if len(element) != 1:
-            raise ValueError(f"A cell cannot have more than one element. The elem: {element} is invalid!")
+            raise ValueError(f"A cell needs to have exactly ONE element. The elem: {element} is invalid!")
 
         if adjacent_cells is None:
             raise ValueError("The adjacent cells object is None!")
