@@ -6,7 +6,7 @@ from src.aoc3.cell import Cell
 from tests.aoc3.test_adjacent_cells import ADJACENT_CELLS_DICT
 
 
-def create_cell(x, y, elem):
+def create_cell(x: int, y: int, elem: str) -> Cell:
     coords = Coords(x, y)
     return Cell(coords, elem, AdjacentCells(coords, 2, 2))
 
