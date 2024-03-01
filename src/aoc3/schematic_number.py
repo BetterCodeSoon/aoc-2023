@@ -14,7 +14,7 @@ class SchematicNumber:
         [self._validate_cell(cell) for cell in cells]
 
         self.cells: [Cell] = cells
-        self.value: int = int("".join(cell.element for cell in cells))
+        self._update_value()
 
     def _validate_cell(self, cell: Cell):
         if cell.coords.y != self.row_y:
@@ -33,6 +33,10 @@ class SchematicNumber:
                              f"Cell that is supposed to be added x-coord: {cell.coords.x}")
         self._validate_cell(cell)
         self.cells.append(cell)
+        self._update_value()
+
+    def _update_value(self):
+        self.value: int = int("".join(cell.element for cell in self.cells))
 
     def __eq__(self, other):
         if not isinstance(other, type(self)):

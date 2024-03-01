@@ -26,11 +26,11 @@ class TestSchematicNumber:
         number.add_cell(cell2)
         assert number.cells == expected_cells
 
-    @pytest.mark.parametrize("expected_cells, coord_x, expected_error", [
-        (number_cell_list("12"), 0, None),
-        (number_cell_list("12"), 1, ValueError)
+    @pytest.mark.parametrize("expected_cells, coord_x, expected_value, expected_error", [
+        (number_cell_list("12"), 0, 12, None),
+        (number_cell_list("12"), 1, 12, ValueError)
     ])
-    def test_add_cell(self, expected_cells, coord_x, expected_error):
+    def test_add_cell(self, expected_cells, coord_x, expected_value, expected_error):
         cell1: Cell = expected_cells[0]
         cell2: Cell = expected_cells[1]
         cell2.coords.x += coord_x
@@ -38,6 +38,7 @@ class TestSchematicNumber:
         if expected_error is None:
             assert number.add_cell(cell2) is None
             assert number.cells == expected_cells
+            assert number.value == expected_value
         else:
             with pytest.raises(expected_error):
                 number.add_cell(cell2)
