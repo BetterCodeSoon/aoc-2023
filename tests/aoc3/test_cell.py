@@ -53,7 +53,7 @@ class TestCell:
         assert create_cell(1, 2, ".").is_period()
 
     def test_is_symbol(self):
-        assert create_cell(1, 1, "2").is_symbol()
+        assert not create_cell(1, 1, "2").is_symbol()
         assert create_cell(1, 1, "#").is_symbol()
         assert not create_cell(1, 2, ".").is_symbol()
 

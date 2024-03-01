@@ -29,7 +29,7 @@ class Cell:
         return self.element == "."
 
     def is_symbol(self):
-        if self.is_period():
+        if self.is_period() or self.is_digit():
             return False
         return True
 
