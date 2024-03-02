@@ -1,0 +1,14 @@
+~ Example of engine schematic
+~ Comments are not marked by # since the symbol can appear in the data
+~ this testcase file provides input and expected gear ratios
+~ expected value for each line marked with '| ' 
+467..114..
+...*......| 16345
+..35..633.
+......#...
+617*......
+.....+.58.
+..592.....
+......755.
+...$.*....| 451490
+.664.598..
