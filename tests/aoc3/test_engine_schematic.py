@@ -5,16 +5,16 @@ from src.utils.input.input_line import InputLine
 from src.utils.input.testcase_input_file import TestcaseInputFile
 
 
-def testcase_input_file(day, number) -> TestcaseInputFile:
+def helper_testcase_input_file(day, number) -> TestcaseInputFile:
     return TestcaseInputFile(day, number, "~", "|", ',')
 
 
-def testcase_input_lines(day: int, number: int) -> [InputLine]:
-    return testcase_input_file(day, number).testcase_input_lines
+def helper_testcase_input_lines(day: int, number: int) -> [InputLine]:
+    return helper_testcase_input_file(day, number).testcase_input_lines
 
 
-def testcase_expected_values(day: int, number: int) -> [[str]]:
-    return testcase_input_file(day, number).testcase_expected_values
+def helper_testcase_expected_values(day: int, number: int) -> [[str]]:
+    return helper_testcase_input_file(day, number).testcase_expected_values
 
 
 def flat_int_list(value_list: [[str]]) -> [int]:
@@ -23,12 +23,12 @@ def flat_int_list(value_list: [[str]]) -> [int]:
 
 class TestEngineSchematic:
     # x = 10 * y = 10 input, part numbers are in expected values for each row
-    testcase_1_input_lines: [InputLine] = testcase_input_lines(3, 1)
-    testcase_1_expected_values: [[str]] = testcase_expected_values(3, 1)
+    testcase_1_input_lines: [InputLine] = helper_testcase_input_lines(3, 1)
+    testcase_1_expected_values: [[str]] = helper_testcase_expected_values(3, 1)
 
     # testcase to find ALL numbers (independent whether they are part number or not)
-    testcase_2_input_lines: [InputLine] = testcase_input_lines(3, 2)
-    testcase_2_expected_values: [[str]] = testcase_expected_values(3, 2)
+    testcase_2_input_lines: [InputLine] = helper_testcase_input_lines(3, 2)
+    testcase_2_expected_values: [[str]] = helper_testcase_expected_values(3, 2)
 
     @pytest.mark.parametrize("input_lines, expected_max_x, expected_max_y, expected_numbers, expected_part_numbers", [
         (testcase_2_input_lines, 9, 9, flat_int_list(testcase_2_expected_values),
