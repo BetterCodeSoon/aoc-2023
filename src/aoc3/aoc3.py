@@ -7,3 +7,5 @@ if __name__ == '__main__':
 
     print(
         f"The sum of all part numbers in the engine schematic = {sum(engine_schematic.get_all_part_number_values())}\n")
+
+    print(f"And the sum of all gear ratios = {sum(engine_schematic.get_gear_ratios())} ")

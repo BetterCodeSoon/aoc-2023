@@ -8,3 +8,4 @@ class TestAoc3:
         puzzle_file = PuzzleInputFile(3, 1, "#")
         engine_schematic = EngineSchematic(puzzle_file.puzzle_input_lines)
         assert sum(engine_schematic.get_all_part_number_values()) == 551094
+        assert sum(engine_schematic.get_gear_ratios()) == 80179647
