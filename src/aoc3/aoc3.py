@@ -1,7 +1,9 @@
-from src.utils import file_helper
+from src.aoc3.engine_schematic import EngineSchematic
+from src.utils.input.puzzle_input_file import PuzzleInputFile
 
 if __name__ == '__main__':
-    puzzle_path = file_helper.puzzle_input_path(3, 1)
-    file_lines = file_helper.read_file_lines(puzzle_path)
+    puzzle_file = PuzzleInputFile(3, 1, "#")
+    engine_schematic = EngineSchematic(puzzle_file.puzzle_input_lines)
 
-    # toDo: here Solution for Day3 puzzle
+    print(
+        f"The sum of all part numbers in the engine schematic = {sum(engine_schematic.get_all_part_number_values())}\n")
