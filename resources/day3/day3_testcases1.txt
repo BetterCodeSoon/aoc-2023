@@ -1,0 +1,14 @@
+~ Example of engine schematic
+~ Comments are not marked by # since the symbol can appear in the data
+~ numbers that are NOT 'part numbers': 144, 58
+~ expected value for each line marked with '| ' 
+467..114..| 467
+...*......
+..35..633.| 35, 633
+......#...
+617*......| 617
+.....+.58.|
+..592.....| 592
+......755.| 755
+...$.*....
+.664.598..| 664, 598

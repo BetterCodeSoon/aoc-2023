@@ -1,9 +1,8 @@
 import pytest
 
-from src.aoc2 import input_helper
-from src.aoc2.cube_container import CubeContainer
-from src.aoc2.elf_game import ElfGame
 import src.utils.file_helper as file_helper
+from src.aoc2 import aoc2_input_helper
+from src.aoc2.elf_game import ElfGame
 
 
 def max_color_testcases_dict():
@@ -16,7 +15,7 @@ def max_color_testcases_dict():
 
     for elf_game_str, min_values in game_min_values_tuple_list:
         max_values_list = min_values.split(".")
-        elf_game = input_helper.str_to_elf_game(str(elf_game_str))
+        elf_game = aoc2_input_helper.str_to_elf_game(str(elf_game_str))
         elf_game_max_red_list.append((elf_game, int(max_values_list[0])))
         elf_game_max_green_list.append((elf_game, int(max_values_list[1])))
         elf_game_max_blue_list.append((elf_game, int(max_values_list[2])))
@@ -40,9 +39,9 @@ def read_example_testcases() -> [(ElfGame, bool)]:
     elf_game_eval_list = []
 
     for input_tuple in game_tuple_list:
-        game_id = input_helper.read_game_id(input_tuple[0])
+        game_id = aoc2_input_helper.read_game_id(input_tuple[0])
         game_sets_str, correct_evaluation = input_tuple[1].split("#")
-        game_sets = input_helper.read_game_sets_list(game_sets_str)
+        game_sets = aoc2_input_helper.read_game_sets_list(game_sets_str)
 
         elf_game_eval_list.append((ElfGame(game_id, game_sets), bool(int(correct_evaluation))))
 
@@ -56,21 +55,29 @@ class TestElfGame:
         assert input_game.possible_game(aoc2_bag) == expected
 
     @pytest.mark.parametrize("elf_game1, elf_game2, expected",
-                             [(input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
-                               input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                             [(aoc2_input_helper.str_to_elf_game(
+                                 "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                               aoc2_input_helper.str_to_elf_game(
+                                   "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
                                True),
-                              (input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
-                               input_helper.str_to_elf_game("Game 1: 3 blue, 1 red; 1 red, 2 green, 444 blue; 2 green"),
+                              (aoc2_input_helper.str_to_elf_game(
+                                  "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                               aoc2_input_helper.str_to_elf_game(
+                                   "Game 1: 3 blue, 1 red; 1 red, 2 green, 444 blue; 2 green"),
                                False)])
     def test_equality_operator(self, elf_game1, elf_game2, expected):
         assert (elf_game1 == elf_game2) == expected
 
     @pytest.mark.parametrize("elf_game1, elf_game2, expected",
-                             [(input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
-                               input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                             [(aoc2_input_helper.str_to_elf_game(
+                                 "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                               aoc2_input_helper.str_to_elf_game(
+                                   "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
                                False),
-                              (input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
-                               input_helper.str_to_elf_game("Game 1: 3 blue, 1 red; 1 red, 2 green, 444 blue; 2 green"),
+                              (aoc2_input_helper.str_to_elf_game(
+                                  "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                               aoc2_input_helper.str_to_elf_game(
+                                   "Game 1: 3 blue, 1 red; 1 red, 2 green, 444 blue; 2 green"),
                                True)])
     def test_inequality_operator(self, elf_game1, elf_game2, expected):
         assert (elf_game1 != elf_game2) == expected
@@ -91,9 +98,10 @@ class TestElfGame:
         assert input_elf_game.max_blue_value() == expected
 
     @pytest.mark.parametrize("input_elf_game, expected",
-                             [(input_helper.str_to_elf_game("Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
+                             [(aoc2_input_helper.str_to_elf_game(
+                                 "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"),
                                48),
-                              (input_helper.str_to_elf_game(
+                              (aoc2_input_helper.str_to_elf_game(
                                   "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red"),
                                1560)])
     def test_calc_power(self, input_elf_game, expected):
