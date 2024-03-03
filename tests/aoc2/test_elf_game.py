@@ -3,6 +3,7 @@ import pytest
 import src.utils.file_helper as file_helper
 from src.aoc2 import aoc2_input_helper
 from src.aoc2.elf_game import ElfGame
+from src.aoc2.cube_container import CubeContainer
 
 
 def max_color_testcases_dict():
@@ -39,10 +40,10 @@ def read_example_testcases() -> [(ElfGame, bool)]:
     elf_game_eval_list = []
 
     for input_tuple in game_tuple_list:
+
         game_id = aoc2_input_helper.read_game_id(input_tuple[0])
         game_sets_str, correct_evaluation = input_tuple[1].split("#")
         game_sets = aoc2_input_helper.read_game_sets_list(game_sets_str)
-
         elf_game_eval_list.append((ElfGame(game_id, game_sets), bool(int(correct_evaluation))))
 
     return elf_game_eval_list

@@ -1,5 +1,4 @@
 import pytest
-
 import src.utils.file_helper as file_helper
 from aoc2.bag import Bag
 
