@@ -1,5 +1,5 @@
 import pytest
-import src.aoc2.input_helper as input_helper
+import src.aoc2.aoc2_input_helper as input_helper
 from src.aoc2.cube_container import CubeContainer
 from src.aoc2.elf_game import ElfGame
 

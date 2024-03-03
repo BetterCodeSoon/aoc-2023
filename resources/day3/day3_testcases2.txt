@@ -1,0 +1,14 @@
+~ Example of engine schematic
+~ Comments are not marked by # since the symbol can appear in the data
+~ this testcase file provides input and expected numbers
+~ expected value for each line marked with '| ' 
+467..114..| 467, 114
+...*......|
+..35..633.| 35, 633
+......#...|
+617*......| 617
+.....+.58.| 58
+..592.....| 592
+......755.| 755
+...$.*....|
+.664.598..| 664, 598

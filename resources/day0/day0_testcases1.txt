@@ -1,0 +1,4 @@
+~ Test file for InputFile utility class
+467..114..| 144
+...*......
+..11.+.58.| 11, 58
