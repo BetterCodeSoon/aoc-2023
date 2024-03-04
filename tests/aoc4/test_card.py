@@ -32,7 +32,7 @@ class TestCard:
                             expected_points):
         card = Card(InputLine(input_str, ":", True))
 
-        assert card.game_id == 1
+        assert card.card_id == 1
         assert card.winning_numbers == expected_winning_num
         assert card.card_numbers == expected_card_nums
         assert card.matches == expected_matches

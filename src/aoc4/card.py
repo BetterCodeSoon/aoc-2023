@@ -7,7 +7,7 @@ from utils.input.input_line import InputLine
 class Card:
 
     def __init__(self, input_line: InputLine):
-        self.game_id: int = int(self._remove_non_digits(input_line.line_str))
+        self.card_id: int = int(self._remove_non_digits(input_line.line_str))
         self._split_numbers(input_line.next_line_part)
         self._card_points()
 
