@@ -6,7 +6,7 @@ from src.utils import file_helper
 
 class InputFile:
 
-    def __init__(self, file_type: str, day: int, file_number: int, comment_marker: str = '#'):
+    def __init__(self, file_type: str, day: int, file_number: int, comment_marker: str = '#', rstrip: bool = True):
 
         if file_type is None:
             raise Exception(f"Ahhh panic!!! The file type is None! x_x")
@@ -15,7 +15,7 @@ class InputFile:
             raise ValueError(f"The file type: {file_type} is not a valid type")
 
         self.file_path: Path = self._get_path(file_type, day, file_number)
-        self.file_lines: [str] = file_helper.read_file_lines(self.file_path, comment_marker)
+        self.file_lines: [str] = file_helper.read_file_lines(self.file_path, comment_marker, rstrip)
 
     @staticmethod
     def _get_path(file_type: str, day: int, file_number: int):

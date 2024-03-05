@@ -43,9 +43,12 @@ def puzzle_testcases_path(day, testcase):
     return path_for_day(day) / puzzle_testcases_filename(day, testcase)
 
 
-def read_file_lines(filepath, comment_marker: str = '#'):
+def read_file_lines(filepath, comment_marker: str = '#', rstrip: bool = True):
     with open(filepath, "r") as file:
-        return [line.rstrip() for line in file.readlines() if not line.startswith(comment_marker)]
+        if rstrip:
+            return [line.rstrip() for line in file.readlines() if not line.startswith(comment_marker)]
+        else:
+            return [line for line in file.readlines() if not line.startswith(comment_marker)]
 
 
 def read_expected_values(filepath, delimiter) -> {str: str}:
