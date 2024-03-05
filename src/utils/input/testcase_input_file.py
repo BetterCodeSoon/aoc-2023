@@ -12,8 +12,8 @@ class TestcaseInputFile(InputFile):
 
         self.testcase_input_lines: [InputLine] = [InputLine(line, values_delimiter) for line in self.file_lines]
 
-        next_line_parts = [input_line.next_line_part for input_line in self.testcase_input_lines]
-        self.testcase_expected_values: [[str]] = self._separate_values(next_line_parts, value_separator)
+        self.next_line_parts: [str] = [input_line.next_line_part for input_line in self.testcase_input_lines]
+        self.testcase_expected_values: [[str]] = self._separate_values(self.next_line_parts, value_separator)
 
     @staticmethod
     def _separate_values(next_line_parts: [str], value_separator: str) -> [[str]]:

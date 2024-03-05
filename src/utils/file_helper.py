@@ -4,6 +4,9 @@ CURRENT_FILE = Path(__file__)
 PROJECT_ROOT = CURRENT_FILE.parent.parent.parent
 
 
+# toDo: refactor this file so that all the methods become static methods in a FileHelper class
+#       (as to hide away unimportant, low level functions as private)
+
 def path_for_day(day):
     return PROJECT_ROOT / "resources" / f"day{day}"
 
