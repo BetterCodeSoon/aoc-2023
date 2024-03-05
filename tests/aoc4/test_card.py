@@ -5,17 +5,14 @@ from src.utils.input.input_line import InputLine
 from src.utils.input.testcase_input_file import TestcaseInputFile
 from src.utils.string_helper import remove_empty_strings, to_int
 
-DAY: int = 4
-COMMENT_MARKER: str = '#'
 
-
-def testcase_input_file(day, number, comment_marker: str = '#', values_delimiter: str = '|',
-                        value_separator: str = ',') -> TestcaseInputFile:
+def get_tcases_input_file(day: int, number: int, comment_marker: str = '#', values_delimiter: str = '|',
+                          value_separator: str = ',') -> TestcaseInputFile:
     return TestcaseInputFile(day, number, comment_marker, values_delimiter, value_separator)
 
 
-def testcase2_inputs():
-    testcases2 = testcase_input_file(DAY, 2, COMMENT_MARKER, "=", "value_separator")
+def tcase2_inputs():
+    testcases2 = get_tcases_input_file(4, 2, "#", "=", "value_separator")
 
     matches_copies_list = [input_line.split(", ") for input_line in testcases2.next_line_parts]
     matches = []
@@ -43,7 +40,7 @@ def testcase2_inputs():
 
 class TestCard:
 
-    @pytest.mark.parametrize("input_line, card_id, winning_nums, card_nums, matches, copies", testcase2_inputs())
+    @pytest.mark.parametrize("input_line, card_id, winning_nums, card_nums, matches, copies", tcase2_inputs())
     def test_initialization(self, input_line, card_id, winning_nums, card_nums, matches, copies):
         card = Card(input_line)
 
