@@ -1,4 +1,5 @@
 from src.aoc4.card import Card
+from src.aoc4.scratchcards import Scratchcards
 from src.utils.input.puzzle_input_file import PuzzleInputFile
 
 
@@ -12,6 +13,6 @@ def total_points(cards_list: [Card]):
 
 if __name__ == '__main__':
     puzzle_file = PuzzleInputFile(4, 1, "#", ":")
-    cards = cards(puzzle_file)
-    total_points = total_points(cards)
-    print(f"The total points of all the cards = {total_points}")
+    cards_list = cards(puzzle_file)
+    print(f"The total points of all the cards = {total_points(cards_list)} \n")
+    print(f"The total number of scratchcards = {Scratchcards(cards_list).total_cards} \n")
