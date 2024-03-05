@@ -16,3 +16,11 @@ def is_single_char(delimiter: str):
     if len(delimiter) <= 1:
         return True
     return False
+
+
+def to_int(input_list: [str]) -> [int]:
+    return [int(item) for item in input_list if item != ""]
+
+
+def flat_int_list(value_list: [[str]]) -> [int]:
+    return [int(value) for sublist in value_list for value in sublist if value != '']
