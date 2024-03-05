@@ -28,11 +28,13 @@ class Card:
 
     def _card_points(self):
         self.points = 0
-        self.matches = 0
+        self.matches_count = 0
+        self.matches: [int] = []
 
         if len(self.winning_numbers) != 0:
 
             for winning_num in self.winning_numbers:
                 if winning_num in self.card_numbers:
-                    self.matches += 1
-                    self.points = self._points(self.matches, self.points)
+                    self.matches_count += 1
+                    self.matches.append(winning_num)
+                    self.points = self._points(self.matches_count, self.points)
