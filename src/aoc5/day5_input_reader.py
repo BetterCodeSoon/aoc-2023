@@ -9,13 +9,13 @@ class Day5InputReader:
             raise ValueError("Danger eek! The input file is None!!\n")
 
         file_lines = input_file.file_lines
-        self.seeds: [int] = self.seeds(file_lines[0])
+        self.seeds: [int] = self.collect_seeds(file_lines[0])
 
         maps_lines: [str] = file_lines[2:]
         self.maps_str_list = self.collect_maps(maps_lines)
 
     @staticmethod
-    def seeds(seeds_str: str) -> [int]:
+    def collect_seeds(seeds_str: str) -> [int]:
         return to_int(seeds_str.split(":")[1].lstrip().split(" "))
 
     @staticmethod
