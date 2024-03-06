@@ -1,4 +1,4 @@
-class AlmanacMap:
+class SourceDestinationMap:
 
     def __init__(self, map_str: [str]):
         if map_str is None:
@@ -56,6 +56,7 @@ class AlmanacMap:
         src_to_dest_dict: {int: int} = {}
         for range_line in ranges_str_list:
             src_to_dest_dict.update(
-                AlmanacMap._generate_mapping_from_line(AlmanacMap._process_range_line_str(range_line)))
+                SourceDestinationMap._generate_mapping_from_line(
+                    SourceDestinationMap._process_range_line_str(range_line)))
 
         return src_to_dest_dict
