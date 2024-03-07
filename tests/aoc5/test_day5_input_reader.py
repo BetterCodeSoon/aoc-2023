@@ -10,7 +10,7 @@ class TestDay5InputReader:
         ("seeds: 79 14 55 13", [79, 14, 55, 13])
     ])
     def test_seeds(self, input_str, expected_seeds_list):
-        assert Day5InputReader.collect_seeds(input_str) == expected_seeds_list
+        assert Day5InputReader._collect_seeds(input_str) == expected_seeds_list
 
     @pytest.mark.parametrize("input_lines, expected_maps_list", [
         (tcase1_file_lines()[2:],
@@ -23,4 +23,4 @@ class TestDay5InputReader:
           ['humidity-to-location', '60 56 37', '56 93 4']])
     ])
     def test_collect_maps(self, input_lines, expected_maps_list):
-        assert Day5InputReader.collect_maps(input_lines) == expected_maps_list
+        assert Day5InputReader._collect_maps(input_lines) == expected_maps_list
