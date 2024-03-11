@@ -7,8 +7,8 @@ from src.utils.string_helper import strip_list_items
 class TestcaseInputFile(InputFile):
 
     def __init__(self, day: int, file_number: int, comment_marker: str = '~', values_delimiter: str = '|',
-                 value_separator: str = ','):
-        super().__init__(TYPE_TESTCASE, day, file_number, comment_marker)
+                 value_separator: str = ',', rstrip: bool = True):
+        super().__init__(TYPE_TESTCASE, day, file_number, comment_marker, rstrip)
 
         self.testcase_input_lines: [InputLine] = [InputLine(line, values_delimiter) for line in self.file_lines]
 
