@@ -14,6 +14,12 @@ class TestAlmanac:
     def test_get_seed_to_location(self, input_seed_number, expected_location_number):
         assert self.almanac.get_seed_to_location(input_seed_number) == expected_location_number
 
+    @pytest.mark.parametrize("input_seeds, expected_seed_ranges", [
+        ([79, 14, 55, 13], [(79, 14), (55, 13)])
+    ])
+    def test_seed_ranges(self, input_seeds, expected_seed_ranges):
+        assert self.almanac._seed_ranges(input_seeds) == expected_seed_ranges
+
     def test_lowest_location_number(self):
         # seeds: [79, 14, 55, 13]
         assert self.almanac.lowest_location_number() == 35
@@ -27,3 +33,6 @@ class TestAlmanac:
     ])
     def test_generate_almanac_dicts(self, input_map_str_list, expected_dict):
         assert Almanac._generate_almanac_dicts(input_map_str_list) == expected_dict
+
+    def test_lowest_location_over_seed_ranges(self):
+        assert self.almanac.lowest_location_over_seed_ranges() == 46
