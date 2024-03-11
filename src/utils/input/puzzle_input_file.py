@@ -6,8 +6,8 @@ from src.utils.input.input_line import InputLine
 class PuzzleInputFile(InputFile):
 
     def __init__(self, day: int, file_number: int, comment_marker: str = '#', delimiter: str = "",
-                 strip_trailing_whitespaces: bool = True):
-        super().__init__(TYPE_PUZZLE, day, file_number, comment_marker)
+                 strip_trailing_whitespaces: bool = True, rstrip: bool = True):
+        super().__init__(TYPE_PUZZLE, day, file_number, comment_marker, rstrip)
         self.puzzle_input_lines = [InputLine(line, delimiter, strip_trailing_whitespaces) for line in self.file_lines]
 
     def __eq__(self, other):

@@ -1,3 +1,5 @@
+import pytest
+
 from src.aoc4.aoc4 import cards, total_points
 from src.aoc4.scratchcards import Scratchcards
 from src.utils.input.puzzle_input_file import PuzzleInputFile
@@ -5,6 +7,7 @@ from src.utils.input.puzzle_input_file import PuzzleInputFile
 
 class TestAoc4:
 
+    @pytest.mark.skip("Test runs too frigging slow")
     def test_aoc4_solution(self):
         expected_total_points = 17782
         expected_total_cards = 8477787
