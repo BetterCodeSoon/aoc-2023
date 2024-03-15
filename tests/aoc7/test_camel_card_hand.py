@@ -7,6 +7,22 @@ from src.utils.string_helper import char_count
 
 class TestCamelCardHand:
 
+    @pytest.mark.parametrize("hand_str, bid_str, expected_hand_type, expected_hand_type_rank", [
+        ("AAAAA", "1000", FIVE_KIND, 7),
+        ("AA8AA", "1000", FOUR_KIND, 6),
+        ("23332", "1000", FULL_HOUSE, 5),
+        ("TTT98", "1000", THREE_KIND, 4),
+        ("23432", "1000", TWO_PAIR, 3),
+        ("A23A4", "1000", ONE_PAIR, 2),
+        ("23456", "1000", HIGH_CARD, 1)
+    ])
+    def test_initialization(self, hand_str, bid_str, expected_hand_type, expected_hand_type_rank):
+        card_hand = CamelCardHand(hand_str, bid_str)
+        assert card_hand.hand_str == hand_str
+        assert card_hand.bid == int(bid_str)
+        assert card_hand.hand_type == expected_hand_type
+        assert card_hand.hand_type_rank == expected_hand_type_rank
+
     @pytest.mark.parametrize("hand_str, expected", [
         ("AAAAA", FIVE_KIND),
         ("AA8AA", FOUR_KIND),

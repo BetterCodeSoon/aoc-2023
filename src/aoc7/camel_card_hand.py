@@ -5,18 +5,22 @@ from src.utils.string_helper import char_count
 
 class CamelCardHand:
 
-    def __init__(self, hand_str: str):
+    def __init__(self, hand_str: str, bid_str: str):
         if hand_str is None:
             raise ValueError("The hand string cannot be None!\n")
         if len(hand_str) != 5:
             raise ValueError("The hand string needs to be exactly 5 chars long")
+        if bid_str is None:
+            raise ValueError("The bid string cannot be None!\n")
 
+        self.bid = int(bid_str)
+        self.hand_str = hand_str
         self.cards = self._hand_cards(hand_str)
         self.hand_type = self._determine_type(hand_str)
-        self.hand_rank = self.type_rank_dict()[self.hand_type]
+        self.hand_type_rank = self.type_rank_dict()[self.hand_type]
 
     def __lt__(self, other):
-        return ((self.hand_rank,) + tuple(self.cards)) < ((other.hand_rank,) + tuple(other.cards))
+        return ((self.hand_type_rank,) + tuple(self.cards)) < ((other.hand_type_rank,) + tuple(other.cards))
 
     @staticmethod
     def _hand_cards(hand_str: str):
