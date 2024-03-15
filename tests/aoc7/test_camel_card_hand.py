@@ -1,7 +1,7 @@
 import pytest
 
-from src.aoc7.camel_card_hand import CamelCardHand
 from src.aoc7 import *
+from src.aoc7.camel_card_hand import CamelCardHand
 from src.utils.string_helper import char_count
 
 
