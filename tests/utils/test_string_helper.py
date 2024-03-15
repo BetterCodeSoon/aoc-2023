@@ -1,3 +1,5 @@
+import pytest
+
 from src.utils.string_helper import *
 
 
@@ -13,3 +15,10 @@ class TestStringHelper:
         assert is_single_char("1") is True
         assert is_single_char("") is True
         assert is_single_char("23") is False
+
+    @pytest.mark.parametrize("hand_str, expected", [
+        ("AAAAAAA", {'A': 7}),
+        ("11A2B", {'1': 2, 'A': 1, '2': 1, 'B': 1})
+    ])
+    def test_char_count(self, hand_str, expected):
+        assert char_count(hand_str) == expected

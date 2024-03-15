@@ -24,3 +24,18 @@ def to_int(input_list: [str]) -> [int]:
 
 def flat_int_list(value_list: [[str]]) -> [int]:
     return [int(value) for sublist in value_list for value in sublist if value != '']
+
+
+def char_count(input_str: str) -> {str: int}:
+    """
+    Returns a dictionary with the number of occurrences for each char in the input string \n
+    e.g.: "AAAAAAA" -> {'A': 7}
+    """
+    char_count_dict = {}
+    for i in range(0, len(input_str)):
+        char = input_str[i]
+        if char not in char_count_dict:
+            char_count_dict[char] = 1
+        else:
+            char_count_dict[char] += 1
+    return char_count_dict
