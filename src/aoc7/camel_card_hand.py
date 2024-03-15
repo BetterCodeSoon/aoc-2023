@@ -9,7 +9,7 @@ class CamelCardHand:
         if hand_str is None:
             raise ValueError("The hand string cannot be None!\n")
         if len(hand_str) != 5:
-            raise ValueError("The hand string needs to be exactly 5 chars long")
+            raise ValueError(f"The hand string needs to be exactly 5 chars long but str={hand_str}\n")
         if bid_str is None:
             raise ValueError("The bid string cannot be None!\n")
 
@@ -20,7 +20,8 @@ class CamelCardHand:
         self.hand_type_rank = self.type_rank_dict()[self.hand_type]
 
     def __lt__(self, other):
-        return ((self.hand_type_rank,) + tuple(self.cards)) < ((other.hand_type_rank,) + tuple(other.cards))
+        return (((self.hand_type_rank,) + tuple(card.card_rank for card in self.cards)) <
+                ((other.hand_type_rank,) + tuple(card.card_rank for card in other.cards)))
 
     @staticmethod
     def _hand_cards(hand_str: str):
