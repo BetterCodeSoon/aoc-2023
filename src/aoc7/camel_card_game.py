@@ -4,8 +4,9 @@ from src.utils.input.input_line import InputLine
 
 class CamelCardGame:
 
-    def __init__(self, input_lines: [InputLine]):
-        hands = [CamelCardHand(input_line.line_str, input_line.next_line_part) for input_line in input_lines]
+    def __init__(self, input_lines: [InputLine], joker_rule: bool = False):
+        hands = [CamelCardHand(input_line.line_str, input_line.next_line_part, joker_rule) for input_line in
+                 input_lines]
         self.hands = sorted(hands)
         self.winnings_dict = self.calc_winnings_dict(self.hands)
         self.total_winnings = self.calc_total_winnings(self.winnings_dict)
