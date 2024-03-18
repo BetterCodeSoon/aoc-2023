@@ -6,6 +6,12 @@ class TestAoc7:
 
     def test_aoc7(self):
         puzzle_file = PuzzleInputFile(7, 1, '#', " ")
-        card_game = CamelCardGame(puzzle_file.puzzle_input_lines)
+
         # Part 1:
+        card_game = CamelCardGame(puzzle_file.puzzle_input_lines)
         assert card_game.total_winnings == 248105065
+
+        # Part 2:
+        joker_card_game = CamelCardGame(puzzle_file.puzzle_input_lines, True)
+        # toDo: Fix error since 249376674 is too low :(
+        # assert card_game.total_winnings == correct_amount
