@@ -5,7 +5,7 @@ from src.utils.string_helper import char_count
 
 class CamelCardHand:
 
-    def __init__(self, hand_str: str, bid_str: str):
+    def __init__(self, hand_str: str, bid_str: str, joker_rule: bool = False):
         if hand_str is None:
             raise ValueError("The hand string cannot be None!\n")
         if len(hand_str) != 5:
@@ -15,8 +15,10 @@ class CamelCardHand:
 
         self.bid = int(bid_str)
         self.hand_str = hand_str
-        self.cards = self._hand_cards(hand_str)
-        self.hand_type = self._determine_type(hand_str)
+        self.play_with_joker_rule = joker_rule
+        self.cards = self._hand_cards(hand_str, joker_rule)
+        self.joker_hand_str = self._use_jokers(hand_str, self.cards, joker_rule)
+        self.hand_type = self._determine_type(self.joker_hand_str)
         self.hand_type_rank = self.type_rank_dict()[self.hand_type]
 
     def __lt__(self, other):
@@ -24,8 +26,47 @@ class CamelCardHand:
                 ((other.hand_type_rank,) + tuple(card.card_rank for card in other.cards)))
 
     @staticmethod
-    def _hand_cards(hand_str: str):
-        return [CamelCard(char) for char in hand_str]
+    def _hand_cards(hand_str: str, joker_rule: bool = False):
+        return [CamelCard(char, joker_rule) for char in hand_str]
+
+    @staticmethod
+    def _use_jokers(hand_str: str, cards: [CamelCard], joker_rule: bool = False) -> str:
+        joker = 'J'
+        char_counts_dict = char_count(hand_str)
+
+        if joker not in char_counts_dict or not joker_rule:
+            return hand_str
+
+        joker_count = char_counts_dict[joker]
+        if joker_count == 5:
+            return "AAAAA"
+
+        no_joker_cards = [card for card in cards if card.card_label != joker]
+        no_joker_counts_dict = {key: value for key, value in char_counts_dict.items() if key != joker}
+
+        if joker_count == 4:
+            return hand_str.replace(joker, list(no_joker_counts_dict.keys())[0])
+
+        no_joker_highest_count_char = max(no_joker_counts_dict, key=lambda k: no_joker_counts_dict[k])
+
+        number_of_none_jokers = len(no_joker_counts_dict)
+        sum_of_none_joker_counts = sum(no_joker_counts_dict.values())
+
+        new_card_char = ""
+        if sum_of_none_joker_counts % number_of_none_jokers == 0:
+            #  e.g. "KK" -> 1 % 2 != 0
+            #  e.g. "2345" -> 4 % 4 == 0
+            highest_rank_card = max(no_joker_cards, key=lambda card: card.card_rank)
+            new_card_char = highest_rank_card.card_label
+        else:
+            # e.g "2343" -> 3 % 4 != 0
+            new_card_char = no_joker_highest_count_char
+
+        return hand_str.replace(joker, new_card_char)
+
+    @staticmethod
+    def _is_uneven(number: int) -> bool:
+        return number % 2 == 0
 
     @staticmethod
     def _determine_type(hand_str: str):
