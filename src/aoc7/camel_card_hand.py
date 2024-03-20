@@ -41,35 +41,38 @@ class CamelCardHand:
         if joker_count == 5:
             return "AAAAA"
 
-        no_joker_cards = [card for card in cards if card.card_label != joker]
         no_joker_counts_dict = {key: value for key, value in char_counts_dict.items() if key != joker}
 
         if joker_count == 4:
             return hand_str.replace(joker, list(no_joker_counts_dict.keys())[0])
 
-        no_joker_highest_count_char = max(no_joker_counts_dict, key=lambda k: no_joker_counts_dict[k])
-
-        number_of_none_jokers = len(no_joker_counts_dict)
-        sum_of_none_joker_counts = sum(no_joker_counts_dict.values())
-
-        new_card_char = ""
-        if sum_of_none_joker_counts % number_of_none_jokers == 0:
-            #  e.g. "KK" -> 1 % 2 != 0
-            #  e.g. "2345" -> 4 % 4 == 0
-            highest_rank_card = max(no_joker_cards, key=lambda card: card.card_rank)
-            new_card_char = highest_rank_card.card_label
-        else:
-            # e.g "2343" -> 3 % 4 != 0
-            new_card_char = no_joker_highest_count_char
+        no_joker_cards = [card for card in cards if card.card_label != joker]
+        highest_rank_card = max(no_joker_cards, key=lambda card: card.card_rank)
+        new_card_char = CamelCardHand._find_card_char_to_replace(no_joker_counts_dict, highest_rank_card.card_label)
 
         return hand_str.replace(joker, new_card_char)
 
     @staticmethod
-    def _is_uneven(number: int) -> bool:
-        return number % 2 == 0
+    def _find_card_char_to_replace(no_joker_counts_dict: {str: int}, highest_rank_card_label: str) -> str:
+        most_frequent_char = max(no_joker_counts_dict, key=lambda k: no_joker_counts_dict[k])
+
+        if CamelCardHand._more_than_half(most_frequent_char, no_joker_counts_dict):
+            return most_frequent_char
+
+        return highest_rank_card_label
 
     @staticmethod
-    def _determine_type(hand_str: str):
+    def _more_than_half(most_frequent_char: str, no_joker_counts_dict: {str: int}) -> bool:
+        most_frequent_char_count = no_joker_counts_dict[most_frequent_char]
+        is_more_than_half = True
+        for key, value in no_joker_counts_dict.items():
+            if key != most_frequent_char:
+                if value == most_frequent_char_count:
+                    is_more_than_half = False
+        return is_more_than_half
+
+    @staticmethod
+    def _determine_type(hand_str: str) -> str:
         hand_type_check_functions = {
             FIVE_KIND: CamelCardHand._is_five_kind,
             FOUR_KIND: CamelCardHand._is_four_kind,

@@ -24,13 +24,17 @@ class TestCamelCardHand:
         assert card_hand.hand_type_rank == expected_hand_type_rank
 
     @pytest.mark.parametrize("input_hand, other_hand, expected", [
+        (Hand("23456", "5", False), Hand("23456", "10", False), False),
+        (Hand("23456", "5", True), Hand("23456", "10", True), False),
         (Hand("J2345", "5", True), Hand("22345", "10", True), True),
         (Hand("2A34J", "5", True), Hand("22344", "10", True), True)
+
     ])
     def test_less_than(self, input_hand, other_hand, expected):
         assert (input_hand < other_hand) == expected
 
     @pytest.mark.parametrize("hand_str, cards, joker_rule, expected_str", [
+        ("J4449", Hand._hand_cards("J4449", True), True, "44449"),
         ("AJJJJ", Hand._hand_cards("AJJJJ", False), False, "AJJJJ"),
         ("AJJJJ", Hand._hand_cards("AJJJJ", True), True, "AAAAA"),  # Five kind
         ("A2JAJ", Hand._hand_cards("A2JAJ", True), True, "A2AAA"),  # Four kind
@@ -42,6 +46,18 @@ class TestCamelCardHand:
     ])
     def test_use_jokers(self, hand_str, cards, joker_rule, expected_str):
         assert Hand._use_jokers(hand_str, cards, joker_rule) == expected_str
+
+    @pytest.mark.parametrize("no_joker_counts_dict, highest_rank_card_label, expected", [
+        ({'2': 2, '4': 1, '9': 1}, '9', '2'),
+        ({'2': 1, '4': 1, '9': 1}, '9', '9'),
+        ({'4': 3, '9': 1}, '9', '4'),
+        ({'4': 2, '9': 2}, '9', '9'),
+        ({'4': 1, '9': 1}, '9', '9'),
+        ({'9': 3}, '9', '9'),
+
+    ])
+    def test_find_card_char_to_replace(self, no_joker_counts_dict, highest_rank_card_label, expected):
+        assert Hand._find_card_char_to_replace(no_joker_counts_dict, highest_rank_card_label) == expected
 
     @pytest.mark.parametrize("hand_str, expected", [
         ("AAAAA", FIVE_KIND),
