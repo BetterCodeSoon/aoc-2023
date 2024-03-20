@@ -13,5 +13,4 @@ class TestAoc7:
 
         # Part 2:
         joker_card_game = CamelCardGame(puzzle_file.puzzle_input_lines, True)
-        # toDo: Fix error since 249376674 is too low :(
-        # assert card_game.total_winnings == correct_amount
+        assert joker_card_game.total_winnings == 249515436
