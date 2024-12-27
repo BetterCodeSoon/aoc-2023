@@ -9,6 +9,6 @@ if __name__ == '__main__':
     # Day8 Solution Part 1:
 
     network = Network(day8_input_reader.path, day8_input_reader.network_dict)
-    steps = network.steps_to_zzz()
+    steps = network.part1_steps_to_zzz()
 
     print(f"It took {steps} to reach ZZZ! \n\n")

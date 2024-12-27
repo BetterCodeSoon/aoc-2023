@@ -8,26 +8,26 @@ class Network:
     def __init__(self, path: str, network_dict: {str: (str, str)}):
         self.path = path
         self.network_dict = network_dict
-        self.steps_counted = 0
+        self.part1_steps_counted = 0
         self.current_node = "AAA"
 
-    def steps_to_zzz(self) -> int:
+    def part1_steps_to_zzz(self) -> int:
         # follow sequence of instructions in path
         # IF final node equals ZZZ stop counting steps
         # ELSE run sequence again
-        self.current_node = self._run_path(self.path, self.network_dict, self.current_node)
+        self.current_node = self._part1_run_path(self.path, self.network_dict, self.current_node)
         if self.current_node == ZZZ:
-            return self.steps_counted
+            return self.part1_steps_counted
         else:
-            return self.steps_to_zzz()
+            return self.part1_steps_to_zzz()
 
-    def _run_path(self, path: str, network_dict: {str: (str, str)}, start_node: str) -> str:
+    def _part1_run_path(self, path: str, network_dict: {str: (str, str)}, start_node: str) -> str:
         current_node = start_node
         for direction_char in path:
             if current_node == ZZZ:
                 return current_node
             current_node = Network._next_node(network_dict, direction_char, current_node)
-            self.steps_counted += 1
+            self.part1_steps_counted += 1
         return current_node
 
     @staticmethod

@@ -34,15 +34,15 @@ class TestNetwork:
                              [(test1_path, test1_network_dict, 2),
                               (test2_path, test2_network_dict, 6)])
     def test_steps_to_zzz(self, path, network_dict, expected_count):
-        assert Network(path, network_dict).steps_to_zzz() == expected_count
+        assert Network(path, network_dict).part1_steps_to_zzz() == expected_count
 
     @pytest.mark.parametrize("path, start_node, expected_node, expected_count",
                              [("LR", "AAA", "EEE", 2),
                               ("RL", "AAA", "ZZZ", 2)])
     def test_run_path(self, path, start_node, expected_node, expected_count):
         network = Network(self.test1_path, self.test1_network_dict)
-        assert network._run_path(path, self.test1_network_dict, start_node) == expected_node
-        assert network.steps_counted == expected_count
+        assert network._part1_run_path(path, self.test1_network_dict, start_node) == expected_node
+        assert network.part1_steps_counted == expected_count
 
     @pytest.mark.parametrize("direction_char, current_node, expected_node",
                              [("L", "AAA", "BBB"),

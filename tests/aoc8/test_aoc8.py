@@ -9,4 +9,4 @@ class TestAoc8:
         puzzle_file = PuzzleInputFile(8, 1, '#', " ")
         day8_input_reader = Day8InputReader(puzzle_file)
         network = Network(day8_input_reader.path, day8_input_reader.network_dict)
-        assert network.steps_to_zzz() == 14257
+        assert network.part1_steps_to_zzz() == 14257
