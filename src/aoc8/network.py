@@ -7,14 +7,14 @@ class Network:
         self.path = path
         self.network_dict = network_dict
         self.part1_steps_counted = 0
-        self.current_node = "AAA"
+        self.part1_current_node = "AAA"
 
     def part1_steps_to_zzz(self) -> int:
         # follow sequence of instructions in path
         # IF final node equals ZZZ stop counting steps
         # ELSE run sequence again
-        self.current_node = self._part1_run_path(self.path, self.network_dict, self.current_node)
-        if self.current_node == ZZZ:
+        self.part1_current_node = self._part1_run_path(self.path, self.network_dict, self.part1_current_node)
+        if self.part1_current_node == ZZZ:
             return self.part1_steps_counted
         else:
             return self.part1_steps_to_zzz()
