@@ -11,3 +11,8 @@ class Counter:
     def count_down(self):
         if self.count > 0:
             self.count -= 1
+
+    def __eq__(self, other):
+        if isinstance(other, Counter):
+            return self.count == other.count
+        return False
