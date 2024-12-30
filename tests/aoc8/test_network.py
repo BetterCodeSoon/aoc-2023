@@ -1,8 +1,8 @@
+import pytest
+
 from src.aoc8.day8_input_reader import Day8InputReader
 from src.aoc8.network import Network
 from src.utils.input.testcase_input_file import TestcaseInputFile
-
-import pytest
 
 
 class TestNetwork:
@@ -15,6 +15,11 @@ class TestNetwork:
     testcases_file2_reader = Day8InputReader(testcases_file2)
     test2_network_dict = testcases_file2_reader.network_dict
     test2_path = testcases_file2_reader.path
+
+    testcases_file3 = TestcaseInputFile(8, 3, '#')
+    testcases_file3_reader = Day8InputReader(testcases_file3)
+    test3_network_dict = testcases_file3_reader.network_dict
+    test3_path = testcases_file3_reader.path
 
     @pytest.mark.parametrize(["expected_path", "expected_network_dict"],
                              [("RL",
@@ -29,6 +34,53 @@ class TestNetwork:
         network = Network(self.test1_path, self.test1_network_dict)
         assert network.path == expected_path
         assert network.network_dict == expected_network_dict
+
+    @pytest.mark.parametrize("network_dict, expected_starting_nodes",
+                             [({"AAA": ("BBB", "CCC"),
+                                "BBA": ("DDD", "EEE"),
+                                "CCC": ("ZZZ", "GGG"),
+                                "DAD": ("DDD", "DDD"),
+                                "AEE": ("EEE", "EEE"),
+                                "GGA": ("GGG", "GGG"),
+                                "ZZZ": ("ZZZ", "ZZZ")}, ["AAA", "BBA", "GGA"])])
+    def test_find_starting_nodes(self, network_dict, expected_starting_nodes):
+        assert Network._find_starting_nodes(network_dict) == expected_starting_nodes
+
+    @pytest.mark.parametrize("path, network_dict, expected_count",
+                             [(test1_path, test1_network_dict, 2),
+                              (test3_path, test3_network_dict, 6)])
+    def test_part2_calc_steps(self, path, network_dict, expected_count):
+        network = Network(path, network_dict)
+        network.part2_calc_steps()
+        assert network.counter.count == expected_count
+
+    @pytest.mark.parametrize("path, network_dict, expected_nodes, expected_count",
+                             [("RL", test1_network_dict, ["ZZZ"], 2),
+                              ("LRLRLR", test3_network_dict, ["11Z", "22Z"], 6)])
+    def test_run_all_paths(self, path, network_dict, expected_nodes, expected_count):
+        network = Network(path, network_dict)
+        network._run_all_paths(network.current_nodes)
+        assert network.current_nodes == expected_nodes
+        assert network.counter.count == expected_count
+
+    @pytest.mark.parametrize("direction_char, nodes, expected",
+                             [("L", ["BBB", "CCC"], ["DDD", "ZZZ"]),
+                              ("R", ["BBB", "CCC"], ["EEE", "GGG"])])
+    def test_next_nodes(self, direction_char, nodes, expected):
+        number_of_nodes = len(nodes)
+        assert Network._next_nodes(self.test1_network_dict, direction_char, number_of_nodes, nodes) == expected
+
+    @pytest.mark.parametrize("node, expected",
+                             [("AAA", False),
+                              ("AAZ", True)])
+    def test_is_z_node(self, node, expected):
+        assert Network._is_z_node(node) == expected
+
+    @pytest.mark.parametrize("nodes, expected",
+                             [(["AAA", "BBZ"], False),
+                              (["AAZ", "BBZ"], True)])
+    def test_all_are_z_nodes(self, nodes, expected):
+        assert Network._are_all_z_nodes(nodes) == expected
 
     @pytest.mark.parametrize("path, network_dict, expected_count",
                              [(test1_path, test1_network_dict, 2),
@@ -49,11 +101,3 @@ class TestNetwork:
                               ("R", "AAA", "CCC")])
     def test_next_node(self, direction_char, current_node, expected_node):
         assert Network._next_node(self.test1_network_dict, direction_char, current_node) == expected_node
-
-    @pytest.mark.parametrize("node_tuple, expected", [(("DDD", "EEE"), "EEE")])
-    def test_right(self, node_tuple, expected):
-        assert Network._right(node_tuple) == expected
-
-    @pytest.mark.parametrize("node_tuple, expected", [(("DDD", "EEE"), "DDD")])
-    def test_left(self, node_tuple, expected):
-        assert Network._left(node_tuple) == expected
