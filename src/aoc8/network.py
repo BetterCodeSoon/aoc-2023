@@ -1,3 +1,6 @@
+import concurrent.futures
+from functools import partial
+
 from src.utils.input.counter import Counter
 
 ZZZ = "ZZZ"
@@ -15,12 +18,16 @@ class Network:
         self.current_nodes: [str] = Network._find_starting_nodes(self.network_dict)
         self.counter = Counter()
 
+    def _reset_part2_attributes(self):
+        self.current_nodes: [str] = Network._find_starting_nodes(self.network_dict)
+        self.counter = Counter()
+
     @staticmethod
     def _find_starting_nodes(network_dict: {str: (str, str)}) -> [str]:
         # Find all nodes that end with "A"
         return [node for node in network_dict.keys() if node[2] == "A"]
 
-    def part2_calc_steps(self, verbose: bool = False):
+    def calc_part2_iterative(self, verbose: bool = False) -> int:
         while not Network._are_all_z_nodes(self.current_nodes):
             count = self.counter.count
             if count == 0 and verbose:
@@ -28,7 +35,10 @@ class Network:
             if count % 1000 == 0 and verbose:
                 print(f"{count} steps.. \n")
             self.current_nodes = self._run_all_paths(self.current_nodes)
-        print(f"Done counting steps at {self.counter.count}")
+
+        if verbose:
+            print(f"Done counting steps at {self.counter.count}")
+        return self.counter.count
 
     def _run_all_paths(self, current_nodes: [str]) -> [str]:
         number_of_nodes = len(current_nodes)
@@ -38,6 +48,36 @@ class Network:
             current_nodes = self._next_nodes(self.network_dict, direction_char, number_of_nodes, current_nodes)
             self.counter.count_up()
         return current_nodes
+
+    def calc_part2_brute_force_processpool(self) -> int:
+        current_nodes = self.current_nodes
+        path = self.path
+
+        with concurrent.futures.ProcessPoolExecutor() as executor:
+            while not Network._are_all_z_nodes(current_nodes):
+                for direction_char in path:
+                    if Network._are_all_z_nodes(current_nodes):
+                        return self.counter.count
+                    partial_next_node = partial(Network._next_node, self.network_dict, direction_char)
+                    current_nodes = list(executor.map(partial_next_node, current_nodes))
+                    self.counter.count_up()
+
+        return self.counter.count
+
+    def calc_part2_brute_force_threadpool(self) -> int:
+        current_nodes = self.current_nodes
+        path = self.path
+
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            while not Network._are_all_z_nodes(current_nodes):
+                for direction_char in path:
+                    if Network._are_all_z_nodes(current_nodes):
+                        return self.counter.count
+                    partial_next_node = partial(Network._next_node, self.network_dict, direction_char)
+                    current_nodes = list(executor.map(partial_next_node, current_nodes))
+                    self.counter.count_up()
+
+        return self.counter.count
 
     @staticmethod
     def _next_nodes(network_dict: {str: (str, str)}, direction_char: str, number_of_nodes: int,

@@ -2,6 +2,7 @@ import pytest
 
 from src.aoc8.day8_input_reader import Day8InputReader
 from src.aoc8.network import Network
+from src.utils import benchmark_helper
 from src.utils.input.testcase_input_file import TestcaseInputFile
 
 
@@ -34,6 +35,8 @@ class TestNetwork:
         network = Network(self.test1_path, self.test1_network_dict)
         assert network.path == expected_path
         assert network.network_dict == expected_network_dict
+        assert network.current_nodes == ["AAA"]
+        assert network.counter.count == 0
 
     @pytest.mark.parametrize("network_dict, expected_starting_nodes",
                              [({"AAA": ("BBB", "CCC"),
@@ -49,10 +52,13 @@ class TestNetwork:
     @pytest.mark.parametrize("path, network_dict, expected_count",
                              [(test1_path, test1_network_dict, 2),
                               (test3_path, test3_network_dict, 6)])
-    def test_part2_calc_steps(self, path, network_dict, expected_count):
+    def test_part_calculations_and_benchmark(self, path, network_dict, expected_count):
         network = Network(path, network_dict)
-        network.part2_calc_steps()
-        assert network.counter.count == expected_count
+        assert benchmark_helper.benchmark(network.calc_part2_iterative) == expected_count
+        network._reset_part2_attributes()
+        assert benchmark_helper.benchmark(network.calc_part2_brute_force_processpool) == expected_count
+        network._reset_part2_attributes()
+        assert benchmark_helper.benchmark(network.calc_part2_brute_force_threadpool) == expected_count
 
     @pytest.mark.parametrize("path, network_dict, expected_nodes, expected_count",
                              [("RL", test1_network_dict, ["ZZZ"], 2),
