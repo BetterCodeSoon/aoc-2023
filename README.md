@@ -1,12 +1,16 @@
-# aoc-2023
-https://adventofcode.com/2023/
+# Quick overview
 
-# tutorial resources and learning material
+Solutions for Advent of Code puzzles with (hopefully 😉) progressively better Python 3.10 code that is tested using [Pytest](https://pytest.org/).
 
-https://waterprogramming.wordpress.com/2023/01/18/structuring-a-python-project-recommendations-and-a-template-example/
+# Project structure
 
-https://stackoverflow.com/questions/50016862/grouping-tests-in-pytest-classes-vs-plain-functions
+Naming convention: day1 puzzle is named aoc1, day2 is named aoc2, ... and so on.
 
-https://www.activestate.com/wp-content/uploads/2020/03/Python-RegEx-Cheatsheet.pdf
+- /src/ -- contains the respective daily puzzle solutions and some helper utilities
+- /tests/ -- pytests for each solution and utilities
+- /resources/ -- puzzle input files and testcase files
 
-https://note.nkmk.me/en/python-re-match-object-span-group/
+
+# Reference links
+
+- https://adventofcode.com/2023/
