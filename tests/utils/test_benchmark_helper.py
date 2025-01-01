@@ -1,5 +1,7 @@
 import time
+
 import pytest
+
 import src.utils.benchmark_helper as benchmark_helper
 
 
