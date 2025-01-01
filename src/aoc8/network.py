@@ -1,4 +1,5 @@
 import concurrent.futures
+import math
 from functools import partial
 
 from src.utils.input.counter import Counter
@@ -78,6 +79,28 @@ class Network:
                     self.counter.count_up()
 
         return self.counter.count
+
+    def calc_part2_analytic(self, verbose: bool = False) -> int:
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            partial_run_path = partial(Network._run_path_threadpool, self.path, self.network_dict)
+            steps_per_path = list(executor.map(partial_run_path, self.current_nodes))
+        if verbose:
+            print(f"Steps per path: {steps_per_path}\n")
+        return math.lcm(*steps_per_path)
+
+    @staticmethod
+    def _run_path_threadpool(path: str, network_dict: {str: (str, str)}, start_node: str) -> int:
+        steps_count = 0
+        current_node = start_node
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            while not Network._is_z_node(current_node):
+                for direction_char in path:
+                    if Network._is_z_node(current_node):
+                        return steps_count
+                    current_node = executor.submit(Network._next_node, network_dict, direction_char,
+                                                   current_node).result()
+                    steps_count += 1
+        return steps_count
 
     @staticmethod
     def _next_nodes(network_dict: {str: (str, str)}, direction_char: str, number_of_nodes: int,

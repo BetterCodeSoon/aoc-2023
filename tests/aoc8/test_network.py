@@ -59,6 +59,8 @@ class TestNetwork:
         assert benchmark_helper.benchmark(network.calc_part2_brute_force_processpool) == expected_count
         network._reset_part2_attributes()
         assert benchmark_helper.benchmark(network.calc_part2_brute_force_threadpool) == expected_count
+        network._reset_part2_attributes()
+        assert benchmark_helper.benchmark(network.calc_part2_analytic) == expected_count
 
     @pytest.mark.parametrize("path, network_dict, expected_nodes, expected_count",
                              [("RL", test1_network_dict, ["ZZZ"], 2),
@@ -93,6 +95,11 @@ class TestNetwork:
                               (test2_path, test2_network_dict, 6)])
     def test_steps_to_zzz(self, path, network_dict, expected_count):
         assert Network(path, network_dict).part1_steps_to_zzz() == expected_count
+
+    @pytest.mark.parametrize("path, start_node, expected_node, expected_count",
+                             [("RL", "AAA", "ZZZ", 2)])
+    def test_run_path_threadpool(self, path, start_node, expected_node, expected_count):
+        assert Network._run_path_threadpool(path, self.test1_network_dict, start_node) == expected_count
 
     @pytest.mark.parametrize("path, start_node, expected_node, expected_count",
                              [("LR", "AAA", "EEE", 2),
